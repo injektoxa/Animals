@@ -19,7 +19,7 @@
             @Html.DisplayNameFor(model => model.Date)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Pets.Nickname)
+            @Html.DisplayNameFor(model => model.Pet.Nickname)
         </th>
         <th></th>
     </tr>
@@ -33,7 +33,7 @@
             @Html.DisplayFor(modelItem => item.Date)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Pets.Nickname)
+            @Html.DisplayFor(modelItem => item.Pet.Nickname)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

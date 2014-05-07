@@ -282,6 +282,8 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jquery.webcam.js" />
+    <Content Include="Scripts\jscam.swf" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -311,7 +313,6 @@
     <Content Include="Views\Account\Manage.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Anamnes\Create.cshtml" />
     <Content Include="Views\Anamnes\Delete.cshtml" />
     <Content Include="Views\Anamnes\Details.cshtml" />
     <Content Include="Views\Anamnes\Edit.cshtml" />
@@ -331,6 +332,7 @@
     <Content Include="Views\Pets\Details.cshtml" />
     <Content Include="Views\Pets\Edit.cshtml" />
     <Content Include="Views\Pets\Index.cshtml" />
+    <Content Include="Views\Anamnes\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

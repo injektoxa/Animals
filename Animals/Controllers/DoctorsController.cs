@@ -66,12 +66,12 @@ namespace Animals.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Doctor doctors = db.Doctors.Find(id);
-            if (doctors == null)
+            Doctor doctor = db.Doctors.Find(id);
+            if (doctor == null)
             {
                 return HttpNotFound();
             }
-            return View(doctors);
+            return View(doctor);
         }
 
         // POST: /Doctors/Edit/5
@@ -97,12 +97,12 @@ namespace Animals.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Doctor doctors = db.Doctors.Find(id);
-            if (doctors == null)
+            Doctor doctor = db.Doctors.Find(id);
+            if (doctor == null)
             {
                 return HttpNotFound();
             }
-            return View(doctors);
+            return View(doctor);
         }
 
         // POST: /Doctors/Delete/5
@@ -110,8 +110,8 @@ namespace Animals.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(Guid id)
         {
-            Doctor doctors = db.Doctors.Find(id);
-            db.Doctors.Remove(doctors);
+            Doctor doctor = db.Doctors.Find(id);
+            db.Doctors.Remove(doctor);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
