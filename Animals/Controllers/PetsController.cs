@@ -13,6 +13,7 @@ namespace Animals.Web.Controllers
 {
     public class PetsController : Controller
     {
+
         private AnimalsEntities db = new AnimalsEntities();
 
         // GET: /Pets/
