@@ -10,7 +10,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using Animals.Models;
 
-namespace Animals.Web.Controllers
+namespace Animals.Controllers
 {
     [Authorize]
     public class AccountController : Controller

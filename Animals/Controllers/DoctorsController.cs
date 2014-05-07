@@ -8,7 +8,7 @@ using System.Web;
 using Animals.Models;
 using System.Web.Mvc;
 
-namespace Animals.Web.Controllers
+namespace Animals.Controllers
 {
     public class DoctorsController : Controller
     {

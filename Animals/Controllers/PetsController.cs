@@ -9,7 +9,7 @@ using System.Web.Mvc;
 using System.IO;
 using Animals.Models;
 
-namespace Animals.Web.Controllers
+namespace Animals.Controllers
 {
     public class PetsController : Controller
     {

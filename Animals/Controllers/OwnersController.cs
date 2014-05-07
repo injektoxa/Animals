@@ -8,7 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Animals.Web.Controllers
+namespace Animals.Controllers
 {
 
 
