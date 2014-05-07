@@ -1,0 +1,268 @@
+﻿@model Animals.Models.Pet
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+<div>
+    <h4>Pets</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nickname)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Nickname)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PType)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Species)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Species)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Age)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Age)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Gender)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Gender)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Castration)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Castration)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Vaccination)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Vaccination)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Deworming)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Deworming)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Treatment__parasites)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Treatment__parasites)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+        <dt>
+            Имя врача
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Doctor.Name)
+        </dd>
+        <dt>
+            Имя хозяина
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Owner.Name)
+        </dd>
+    </dl>
+
+    @if (Model.Anamnes.Count != 0)
+    {
+        <h1> Анамнес </h1>
+        <table class="table">
+            <tr>
+                <th>Дата</th>
+                <th>Текст</th>
+            </tr>
+            @foreach (var item in Model.Anamnes)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Text)
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+
+    @if (Model.Biochemical_analysis_of_blood.Count != 0)
+    {
+        <h1> Биохимический анализ крови </h1>
+        <table class="table">
+            <tr>
+                <th>Алат</th>
+                <th>Албумин</th>
+                <th>Амилаза</th>
+                <th>Асат</th>
+                <th>Са</th>
+                <th>Хлориды</th>
+            </tr>
+            @foreach (var item in Model.Biochemical_analysis_of_blood)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Alat)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Albumin)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Amilaza)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Asat)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Ca)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Clhoriodu)
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+
+    @if (Model.Common_analysis_of_blood.Count != 0)
+    {
+        <h1> Общий анализ крови </h1>
+        <table class="table">
+            <tr>
+                <th>Базофилы абсолютное</th>
+                <th>Базофилы проц</th>
+                <th>Эозинофилы</th>
+                <th>Эозинофилы проц</th>
+                <th>Са</th>
+                <th>Эритроциты</th>
+            </tr>
+            @foreach (var item in Model.Common_analysis_of_blood)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BazofiluAbsolut)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BazofiluPerc)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EozinofiluAbsolut)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EozinofiluPerc)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Eritroc)
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+
+
+    @if (Model.Diagnostics.Count != 0)
+    {
+        <h1> Диагноз </h1>
+        <table class="table">
+            <tr>
+                <th>Дата</th>
+                <th>Текст</th>
+            </tr>
+
+            @foreach (var item in Model.Diagnostics)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Text)
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+
+
+    @if (Model.Surgical_treatments.Count != 0)
+    {
+        <h1> Хирургическое вмешательство </h1>
+        <table class="table">
+            <tr>
+                <th>Дата</th>
+                <th>Текст</th>
+            </tr>
+
+            @foreach (var item in Model.Surgical_treatments)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Text)
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+
+    @if (Model.TemperatureLists.Count != 0)
+    {
+        <h1> Температурный лист </h1>
+        <table class="table">
+            <tr>
+                <th>Дата</th>
+                <th>Пульс</th>
+                <th>Температура</th>
+                <th>Дыхание</th>
+            </tr>
+
+            @foreach (var item in Model.TemperatureLists)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Pulse)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Temperature)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Breath)
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

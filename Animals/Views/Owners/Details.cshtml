@@ -1,0 +1,142 @@
+﻿@model Animals.Models.Owner
+
+@{
+    ViewBag.Title = "Подробно";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Подробно</h2>
+
+<div>
+    <h4>Пациенты</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Имя:
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            Фамилия:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sername)
+        </dd>
+
+        <dt>
+           Отчество:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Patronymic)
+        </dd>
+
+        <dt>
+             Адрес:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Adress)
+        </dd>
+
+        <dt>
+            Телефон:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+
+        <dt>
+            Дата:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+
+        <table class="table">
+            <tr>
+                <th>Кличка</th>
+                <th>Вид</th>
+                <th>Возраст</th>
+                <th>Лечащий врач</th>
+                <th>Пол</th>
+                <th>Порода</th>
+                <th>Обработка от паразитов</th>
+                <th>Вакцинация</th>
+                <th>Дегельметизация</th>
+                <th>Кастрация</th>
+                <th>Подробно</th>
+            </tr>
+            @foreach (var item in Model.Pets)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nickname)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Age)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Doctor.Name)
+                    </td>
+                    <td>
+                      @if (item.Gender)
+                      {
+                          <text> Мальчик </text>
+                      }
+                      else
+                      {
+                          <text> Девочка </text>
+                      }  
+                     </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Species)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Treatment__parasites)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Vaccination)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Deworming)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Castration)
+                    </td>
+                    <td>
+
+                        @Html.ActionLink("Подробно", "Details", "Pets", new { id = item.Id }, "")
+
+                        @*@Html.ActionLink("Анамнез", "Details", "Anamnes", new { id = item.Id }, "")
+                        @Html.ActionLink("Биохимический анализ крови", "Details", "Pets", new { id = item.Id }, "")
+                        @Html.ActionLink("Общий анализ крови", "Details", "Pets", new { id = item.Id }, "")
+
+                        @Html.ActionLink("Диагноз", "Details", "Pets", new { id = item.Id }, "")
+
+                        @Html.ActionLink("Хирургическое вмешательство", "Details", "Pets", new { id = item.Id }, "")
+
+
+                        @Html.ActionLink("Температурный лист", "Details", "Pets", new { id = item.Id }, "")
+                        @Html.ActionLink("Лечение", "Details", "Pets", new { id = item.Id }, "")
+                        @Html.ActionLink("УЗИ", "Details", "Pets", new { id = item.Id }, "")*@
+
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Изменить", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Обратно к списку", "Index")
+</p>

@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="cdb017c8d4834b1eae2a252bf9e689d9" Name="Diagram1">
+        <EntityTypeShape EntityType="AnimalsModel.Analysis_of_urine" Width="1.5" PointX="5.25" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AnimalsModel.Anamne" Width="1.5" PointX="5.25" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AnimalsModel.Bacteriological_research" Width="1.5" PointX="5.25" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AnimalsModel.Biochemical_analysis_of_blood" Width="1.5" PointX="5.25" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="AnimalsModel.Common_analysis_of_blood" Width="1.5" PointX="5.25" PointY="21" IsExpanded="true" />
+        <EntityTypeShape EntityType="AnimalsModel.Coprogram__test" Width="1.5" PointX="5.25" PointY="18.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AnimalsModel.Diagnostic" Width="1.5" PointX="5.25" PointY="27.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AnimalsModel.Doctor" Width="1.5" PointX="0.75" PointY="24.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AnimalsModel.Material" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AnimalsModel.Microscopy" Width="1.5" PointX="5.25" PointY="30.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AnimalsModel.Owner" Width="1.5" PointX="0.75" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AnimalsModel.Pet" Width="1.5" PointX="3" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AnimalsModel.Photo" Width="1.5" PointX="5.25" PointY="33" IsExpanded="true" />
+        <EntityTypeShape EntityType="AnimalsModel.Service" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AnimalsModel.Surgical_treatment" Width="1.5" PointX="5.25" PointY="35.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AnimalsModel.sysdiagram" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AnimalsModel.TemperatureList" Width="1.5" PointX="5.25" PointY="38.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AnimalsModel.Treatment" Width="1.5" PointX="5.25" PointY="41.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AnimalsModel.UZI" Width="1.5" PointX="5.25" PointY="44.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="AnimalsModel.XRay" Width="1.5" PointX="5.25" PointY="47.125" IsExpanded="true" />
+        <AssociationConnector Association="AnimalsModel.FK_Biochemical_analysis_of_urine_Pets" ManuallyRouted="false" />
+        <AssociationConnector Association="AnimalsModel.FK_Anamnes_Pets" ManuallyRouted="false" />
+        <AssociationConnector Association="AnimalsModel.FK_Bacteriological_research_Pets" ManuallyRouted="false" />
+        <AssociationConnector Association="AnimalsModel.FK_Biochemical_analysis_of_blood_Pets" ManuallyRouted="false" />
+        <AssociationConnector Association="AnimalsModel.FK_Common_analysis_of_blood_Pets" ManuallyRouted="false" />
+        <AssociationConnector Association="AnimalsModel.FK_Coprogram__tests_Pets" ManuallyRouted="false" />
+        <AssociationConnector Association="AnimalsModel.FK_Diagnostics_Pets1" ManuallyRouted="false" />
+        <AssociationConnector Association="AnimalsModel.FK_Pets_Doctors" ManuallyRouted="false" />
+        <AssociationConnector Association="AnimalsModel.FK_Microscopy_Pets" ManuallyRouted="false" />
+        <AssociationConnector Association="AnimalsModel.FK_Pets_Owners" ManuallyRouted="false" />
+        <AssociationConnector Association="AnimalsModel.FK_Photos_Pets" ManuallyRouted="false" />
+        <AssociationConnector Association="AnimalsModel.FK_Surgical_treatments_Pets1" ManuallyRouted="false" />
+        <AssociationConnector Association="AnimalsModel.FK_TemperatureList_Pets" ManuallyRouted="false" />
+        <AssociationConnector Association="AnimalsModel.FK_Treatments_Pets" ManuallyRouted="false" />
+        <AssociationConnector Association="AnimalsModel.FK_UZI_Pets" ManuallyRouted="false" />
+        <AssociationConnector Association="AnimalsModel.FK_XRays_Pets" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

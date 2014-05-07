@@ -1,0 +1,73 @@
+﻿@model IEnumerable<Animals.Models.Owner>
+
+@{
+    ViewBag.Title = "Пациенты";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Пациенты</h2>
+
+<p>
+    @Html.ActionLink("Добавить пациента", "Create")
+
+    @using (Html.BeginForm())
+     {
+       <p>
+           Фамилия: @Html.TextBox("searchSername")
+           Адрес: @Html.TextBox("searchAddress")
+           Телефон: @Html.TextBox("searchPhone")
+            <br/>
+           Кличка: @Html.TextBox("searchPet") 
+           Порода: @Html.TextBox("searchBreed")
+           Номер: @Html.TextBox("searchNumber")
+          
+          <input type="submit" value="Filter" />
+       </p>
+     }
+
+</p>
+<table class="table">
+    <tr>
+        <th>
+            №:
+        </th>
+        <th>
+            Имя:
+        </th>
+        <th>
+            Фамилия:
+        </th>
+        <th>
+            Телефон:
+        </th>
+        <th>
+            Адрес:
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Number)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sername)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Phone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Adress)
+        </td>
+          <td>
+            @Html.ActionLink("Изменить", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Подробно", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Удалить", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
