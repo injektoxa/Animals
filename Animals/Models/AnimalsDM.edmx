@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="AnimalsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="AnimalsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Analysis of urine">
           <Key>
             <PropertyRef Name="Id" />
@@ -151,6 +151,7 @@
           <Property Name="Phone" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Date" Type="date" Nullable="false" />
           <Property Name="Number" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Pets">
           <Key>
@@ -169,6 +170,7 @@
           <Property Name="OwnerId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="DoctorId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="BirthDate" Type="date" />
         </EntityType>
         <EntityType Name="Photos">
           <Key>
@@ -523,8 +525,7 @@
             <End Role="XRays" EntitySet="XRays" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="AnimalsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -684,6 +685,7 @@
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Number" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="Pets" Relationship="Self.FK_Pets_Owners" FromRole="Owners" ToRole="Pets" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Pet">
           <Key>
@@ -718,6 +720,7 @@
           <NavigationProperty Name="Treatments" Relationship="Self.FK_Treatments_Pets" FromRole="Pets" ToRole="Treatments" />
           <NavigationProperty Name="UZIs" Relationship="Self.FK_UZI_Pets" FromRole="Pets" ToRole="UZI" />
           <NavigationProperty Name="XRays" Relationship="Self.FK_XRays_Pets" FromRole="Pets" ToRole="XRays" />
+          <Property Name="BirthDate" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="Photo">
           <Key>
@@ -1231,6 +1234,7 @@
           <EntitySetMapping Name="Owners">
             <EntityTypeMapping TypeName="AnimalsModel.Owner">
               <MappingFragment StoreEntitySet="Owners">
+                <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Sername" ColumnName="Sername" />
@@ -1245,6 +1249,7 @@
           <EntitySetMapping Name="Pets">
             <EntityTypeMapping TypeName="AnimalsModel.Pet">
               <MappingFragment StoreEntitySet="Pets">
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Nickname" ColumnName="Nickname" />
                 <ScalarProperty Name="PType" ColumnName="PType" />

@@ -45,6 +45,7 @@ namespace Animals.Models
         public System.Guid OwnerId { get; set; }
         public System.Guid DoctorId { get; set; }
         public System.DateTime Date { get; set; }
+        public Nullable<System.DateTime> BirthDate { get; set; }
     
         public virtual ICollection<Analysis_of_urine> Analysis_of_urine { get; set; }
         public virtual ICollection<Anamne> Anamnes { get; set; }

@@ -1,4 +1,5 @@
 ﻿using Animals.Models;
+using Animals.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -12,7 +13,7 @@ namespace Animals.Controllers
 {
 
 
-    [Authorize]
+    //[Authorize]
     public class OwnersController : Controller
     {
         private AnimalsEntities db = new AnimalsEntities();
@@ -22,7 +23,7 @@ namespace Animals.Controllers
         {
             IEnumerable<Owner> allOwners = db.Owners;
 
-            if (string.IsNullOrEmpty(searchPet) 
+            if (string.IsNullOrEmpty(searchPet)
                 && string.IsNullOrEmpty(searchPhone)
                 && string.IsNullOrEmpty(searchAddress)
                 && string.IsNullOrEmpty(searchNumber)
@@ -156,7 +157,21 @@ namespace Animals.Controllers
         // GET: /Owner/Create
         public ActionResult Create()
         {
-            return View();
+            List<string> petTypes = new List<string>(){
+            "Собака",
+            "Кошка",
+            "Хомяк",
+            "Шиншила",
+            "Харёк",
+            "Крыса",
+            "Кролик"
+            };
+
+            ClientsWithPetsVM clientPetsVm = new ClientsWithPetsVM();
+            clientPetsVm.PetTypes = petTypes;
+            clientPetsVm.DoctorId = new SelectList(db.Doctors, "Id", "Name");
+
+            return View(clientPetsVm);
         }
 
         // POST: /Owner/Create
@@ -164,17 +179,25 @@ namespace Animals.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Sername,Patronymic,Adress,Phone,Date,Number")] Owner owner)
+        public ActionResult Create([Bind(Include = "Pet,Owner,DoctorId,PetTypes")] ClientsWithPetsVM ownerWithClient)
         {
-            if (ModelState.IsValid)
-            {
-                owner.Id = Guid.NewGuid();
-                db.Owners.Add(owner);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+            Owner owner = ownerWithClient.Owner;
 
-            return View(owner);
+            owner.Id = Guid.NewGuid();
+            owner.Date = DateTime.Now;
+            db.Owners.Add(owner);
+            db.SaveChanges();
+
+            Pet pet = ownerWithClient.Pet;
+            pet.OwnerId = owner.Id;
+            pet.Id = Guid.NewGuid();
+            pet.Date = DateTime.Now;
+            pet.PType = ((string[])(ownerWithClient.PetTypes))[0];
+            pet.DoctorId = new Guid(((string[])(ownerWithClient.DoctorId))[0]);
+            db.Pets.Add(pet);
+            db.SaveChanges();
+
+            return RedirectToAction("Index", "Owners");
         }
 
         // GET: /Owner/Edit/5

@@ -27,6 +27,7 @@ namespace Animals.Models
         public string Phone { get; set; }
         public System.DateTime Date { get; set; }
         public int Number { get; set; }
+        public string Email { get; set; }
     
         public virtual ICollection<Pet> Pets { get; set; }
     }
