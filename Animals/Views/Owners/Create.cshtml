@@ -80,7 +80,7 @@
             <div class="form-group">
                 <label class="control-label col-md-2">Вид животного:</label>
                 <div class="col-md-10">
-                   @Html.DropDownList("PetTypes", new SelectList(Model.PetTypes))
+                    @Html.DropDownList("PetTypes", new SelectList(Model.PetTypes))
 
                 </div>
             </div>
@@ -96,8 +96,13 @@
             <div class="form-group">
                 <label class="control-label col-md-2">Пол:</label>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Pet.Gender)
-                    @Html.ValidationMessageFor(model => model.Pet.Gender)
+
+                    @Html.RadioButtonFor(model => model.Pet.Gender, true, true) Мальчик
+
+                    @Html.RadioButtonFor(model => model.Pet.Gender, false, false) Девочка
+
+                    @Html.ValidationMessageFor(model => model.Pet.Gender)<br />
+
                 </div>
             </div>
 
@@ -136,7 +141,14 @@
             <div class="form-group">
                 <label class="control-label col-md-2">Доктор:</label>
                 <div class="col-md-10">
-                    @Html.DropDownList("DoctorId", String.Empty)
+                    @Html.DropDownList("ListDoctors", new SelectList(Model.ListDoctors, "Id", "Name", "0"))
+
+                    @{
+                        if (!string.IsNullOrEmpty(Model.Message))
+                        {
+                           <text> @Model.Message </text>
+                        }
+                    }
 
                 </div>
             </div>

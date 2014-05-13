@@ -5,79 +5,91 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<h2>Подробно</h2>
 <div>
-    <h4>Pets</h4>
+    <h4>Питомец</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Nickname)
+            Кличка:
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Nickname)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.PType)
+           Тип:
         </dt>
         <dd>
             @Html.DisplayFor(model => model.PType)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Species)
+           Порода:
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Species)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Age)
+           Возвраст на момент приема:
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Age)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Gender)
+            Возвраст:
+        </dt>
+        <dd>
+            @{
+             Animals.Models.Age age = new Animals.Models.Age(Model.BirthDate.Value);
+                
+             <text> @age.Years лет, @age.Months мес. </text>
+             
+            }
+        </dd>
+
+        <dt>
+           Пол:
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Gender)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Castration)
+           Кастрация:
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Castration)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Vaccination)
+            Вакцинация:
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Vaccination)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Deworming)
+            Дегельметизация:
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Deworming)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Treatment__parasites)
+            Лечение от паразитов:
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Treatment__parasites)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Date)
+            Дата приема:
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Date)
         </dd>
         <dt>
-            Имя врача
+            Имя врача:
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Doctor.Name)
         </dd>
         <dt>
-            Имя хозяина
+            Имя хозяина:
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Owner.Name)

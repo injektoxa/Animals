@@ -157,7 +157,19 @@ namespace Animals.Controllers
         // GET: /Owner/Create
         public ActionResult Create()
         {
-            List<string> petTypes = new List<string>(){
+            ClientsWithPetsVM clientPetsVm = new ClientsWithPetsVM();
+            clientPetsVm.PetTypes = PopulatePetTypesList();
+            clientPetsVm.ListDoctors = PopulateDoctorsList();
+
+            return View(clientPetsVm);
+        }
+
+        private List<string> PopulatePetTypesList()
+        {
+            List<string> petTypes;
+
+            return petTypes = new List<string>(){
+            "--Выберите тип--",
             "Собака",
             "Кошка",
             "Хомяк",
@@ -166,12 +178,27 @@ namespace Animals.Controllers
             "Крыса",
             "Кролик"
             };
+        }
 
-            ClientsWithPetsVM clientPetsVm = new ClientsWithPetsVM();
-            clientPetsVm.PetTypes = petTypes;
-            clientPetsVm.DoctorId = new SelectList(db.Doctors, "Id", "Name");
+        private List<DoctorForDDl> PopulateDoctorsList()
+        {
+            List<DoctorForDDl> doctorsList = new List<DoctorForDDl>();
+            DoctorForDDl doctor = new DoctorForDDl();
+            doctor.Id = Guid.Empty;
+            doctor.Name = "---Выберите доктора---";
 
-            return View(clientPetsVm);
+            doctorsList.Add(doctor);
+
+            foreach (var i in db.Doctors)
+            {
+                DoctorForDDl doc = new DoctorForDDl();
+                doc.Id = i.Id;
+                doc.Name = i.Name;
+
+                doctorsList.Add(doc);
+            }
+
+            return doctorsList;
         }
 
         // POST: /Owner/Create
@@ -179,25 +206,38 @@ namespace Animals.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Pet,Owner,DoctorId,PetTypes")] ClientsWithPetsVM ownerWithClient)
+        public ActionResult Create([Bind(Include = "Pet,Owner,ListDoctors,PetTypes")] ClientsWithPetsVM ownerWithClient)
         {
-            Owner owner = ownerWithClient.Owner;
+            string petType = ((string[])(ownerWithClient.PetTypes))[0];
+            Guid doctorId = new Guid(((string[])(ownerWithClient.ListDoctors))[0]);
 
-            owner.Id = Guid.NewGuid();
-            owner.Date = DateTime.Now;
-            db.Owners.Add(owner);
-            db.SaveChanges();
+            if (petType != "--Выберите тип--" && Guid.Empty != doctorId)
+            {
+                Owner owner = ownerWithClient.Owner;
 
-            Pet pet = ownerWithClient.Pet;
-            pet.OwnerId = owner.Id;
-            pet.Id = Guid.NewGuid();
-            pet.Date = DateTime.Now;
-            pet.PType = ((string[])(ownerWithClient.PetTypes))[0];
-            pet.DoctorId = new Guid(((string[])(ownerWithClient.DoctorId))[0]);
-            db.Pets.Add(pet);
-            db.SaveChanges();
+                owner.Id = Guid.NewGuid();
+                owner.Date = DateTime.Now;
+                db.Owners.Add(owner);
+                db.SaveChanges();
 
-            return RedirectToAction("Index", "Owners");
+                Pet pet = ownerWithClient.Pet;
+                pet.OwnerId = owner.Id;
+                pet.Id = Guid.NewGuid();
+                pet.Date = DateTime.Now;
+                pet.PType = petType;
+                pet.DoctorId = doctorId;
+                db.Pets.Add(pet);
+                db.SaveChanges();
+
+                return RedirectToAction("Index", "Owners");
+            }
+
+            ClientsWithPetsVM clientPetsVm = new ClientsWithPetsVM();
+            clientPetsVm.PetTypes = PopulatePetTypesList();
+            clientPetsVm.ListDoctors = PopulateDoctorsList();
+            clientPetsVm.Message = "Доктор или тип животного не выбран";
+
+            return View(clientPetsVm);
         }
 
         // GET: /Owner/Edit/5
@@ -252,6 +292,17 @@ namespace Animals.Controllers
         public ActionResult DeleteConfirmed(Guid id)
         {
             Owner owner = db.Owners.Find(id);
+
+            var pets = db.Pets.ToList().Where(p => p.OwnerId == id).ToList();
+
+            if (pets != null)
+            {
+                for (int i = 0; i < pets.Count(); i++)
+                {
+                    db.Pets.Remove(pets[i]);
+                }
+            }
+
             db.Owners.Remove(owner);
             db.SaveChanges();
             return RedirectToAction("Index");

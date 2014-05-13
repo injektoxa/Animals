@@ -5,96 +5,114 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Nickname)
+            Кличка:
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PType)
+            Тип:
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Species)
+            Порода:
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Age)
+            Возраст на момент приема:
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Gender)
+            Возраст:
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Castration)
+            Пол:
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Vaccination)
+            Кастрация:
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Deworming)
+            Вакцинация:
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Treatment__parasites)
+            Дегельметизация:
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Date)
+            Паразиты:
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Doctor.Name)
+            Дата:
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Owner.Name)
+            Имя доктора:
+        </th>
+        <th>
+            Имя хозяина:
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nickname)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PType)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Species)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Age)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Gender)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Castration)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Vaccination)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Deworming)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Treatment__parasites)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Date)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Doctor.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Owner.Name)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nickname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Species)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Age)
+            </td>
+            <td>
+                @{
+
+                    DateTime today = DateTime.Today;
+
+                    if (item.BirthDate != null)
+                    {
+                        int age = today.Year - item.BirthDate.Value.Year;
+
+                        if (item.BirthDate > today.AddYears(-age))
+                        {
+                            age--;
+                        }
+
+                        <text> @age </text>
+                    }
+                }
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Castration)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Vaccination)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Deworming)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Treatment__parasites)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Doctor.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Owner.Name)
+            </td>
+            <td>
+                @Html.ActionLink("Изменить", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Подробно", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Удалить", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
 
 </table>

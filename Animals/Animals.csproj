@@ -161,7 +161,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\PetsWithOwnerController.cs" />
     <Compile Include="Controllers\AnamnesController.cs" />
     <Compile Include="Controllers\DoctorsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -198,6 +197,10 @@
     <Compile Include="Models\Biochemical_analysis_of_blood.cs">
       <DependentUpon>AnimalsDM.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Age.cs" />
+    <Compile Include="Models\DoctorForDDl.cs" />
+    <Compile Include="Models\OwnerMetaData.cs" />
+    <Compile Include="Models\PetMetaData.cs" />
     <Compile Include="ViewModels\ClientsWithPetsVM.cs" />
     <Compile Include="Models\Common_analysis_of_blood.cs">
       <DependentUpon>AnimalsDM.tt</DependentUpon>
@@ -337,7 +340,6 @@
     <Content Include="Views\Pets\Edit.cshtml" />
     <Content Include="Views\Pets\Index.cshtml" />
     <Content Include="Views\Anamnes\Create.cshtml" />
-    <Content Include="Views\PetsWithOwner\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

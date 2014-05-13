@@ -8,7 +8,7 @@
 <h2>Пациенты</h2>
 
 <p>
-    @Html.ActionLink("Добавить пациента","Create","AddPetsWithOwner")
+    @Html.ActionLink("Добавить пациента","Create")
 
     @using (Html.BeginForm())
      {
@@ -43,6 +43,9 @@
         <th>
             Адрес:
         </th>
+        <th>
+            Email:
+        </th>
     </tr>
 
 @foreach (var item in Model) {
@@ -61,6 +64,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Adress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
         </td>
           <td>
             @Html.ActionLink("Изменить", "Edit", new { id=item.Id }) |
