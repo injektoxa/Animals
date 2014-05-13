@@ -1416,6 +1416,7 @@ th {
 .table {
   width: 100%;
   margin-bottom: 20px;
+  margin-top:20px;
 }
 
 .table thead > tr > th,
@@ -1753,7 +1754,7 @@ textarea.form-control {
 }
 
 .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 3px;
 }
 
 .radio,

@@ -4,3 +4,5 @@ Animals/packages/*
 Animals/bin/
 Animals/obj/
 Animals.v12.suo
+Animals/App_Data/UserAccounts.mdf
+Animals/App_Data/UserAccounts_log.ldf

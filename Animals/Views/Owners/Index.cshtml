@@ -8,23 +8,60 @@
 <h2>Пациенты</h2>
 
 <p>
-    @Html.ActionLink("Добавить пациента","Create")
+    @Html.ActionLink("Добавить пациента", "Create")
 
     @using (Html.BeginForm())
-     {
-       <p>
-           Фамилия: @Html.TextBox("searchSername")
-           Адрес: @Html.TextBox("searchAddress")
-           Телефон: @Html.TextBox("searchPhone")
-            <br/>
-           Кличка: @Html.TextBox("searchPet") 
-           Порода: @Html.TextBox("searchBreed")
-           Номер: @Html.TextBox("searchNumber")
-          
-          <input type="submit" value="Filter" />
-       </p>
-     }
+    {
+        <table>
 
+            <tr>
+                <td>
+                    Фамилия:
+                </td>
+                <td>
+                    @Html.TextBox("searchSername")
+                </td>
+                <td>
+                    Адрес:
+                </td>
+                <td>
+                    @Html.TextBox("searchAddress")
+                </td>
+                <td>
+                    Телефон:
+                </td>
+                <td>
+                    @Html.TextBox("searchPhone")
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    Кличка:
+                </td>
+                <td>
+                    @Html.TextBox("searchPet")
+                </td>
+                <td>
+                    Порода:
+                </td>
+                <td>
+                    @Html.TextBox("searchBreed")
+                </td>
+                <td>
+                    Номер:
+                </td>
+                <td>
+                    @Html.TextBox("searchNumber")
+                </td>
+            </tr>
+            <tr>
+                <input type="submit" value="Поиск" />
+            </tr>
+
+        </table>
+
+    }
 </p>
 <table class="table">
     <tr>
@@ -48,32 +85,33 @@
         </th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Number)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Sername)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Phone)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Adress)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-          <td>
-            @Html.ActionLink("Изменить", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Подробно", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Удалить", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Number)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sername)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Adress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.ActionLink("Изменить", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Подробно", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Удалить", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
 
 </table>
