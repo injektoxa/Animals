@@ -1,0 +1,34 @@
+﻿@model Animals.Models.Pet
+
+        <td>
+            @Html.DisplayFor(modelItem => Model.Nickname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.PType)
+        </td>
+        <td>
+            @{
+                if (Model.BirthDate != null)
+                {
+                    Animals.Models.Age age = new Animals.Models.Age(Model.BirthDate.Value);
+
+                    <text> @age.Years лет, @age.Months мес. </text>
+                }
+            }
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.Doctor.Name)
+        </td>
+
+         @*@Html.ActionLink("Анамнез", "Details", "Anamnes", new { id = item.Id }, "")
+            @Html.ActionLink("Биохимический анализ крови", "Details", "Pets", new { id = item.Id }, "")
+            @Html.ActionLink("Общий анализ крови", "Details", "Pets", new { id = item.Id }, "")
+
+            @Html.ActionLink("Диагноз", "Details", "Pets", new { id = item.Id }, "")
+
+            @Html.ActionLink("Хирургическое вмешательство", "Details", "Pets", new { id = item.Id }, "")
+
+
+            @Html.ActionLink("Температурный лист", "Details", "Pets", new { id = item.Id }, "")
+            @Html.ActionLink("Лечение", "Details", "Pets", new { id = item.Id }, "")
+            @Html.ActionLink("УЗИ", "Details", "Pets", new { id = item.Id }, "")*@

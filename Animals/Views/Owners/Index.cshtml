@@ -66,22 +66,34 @@
 <table class="table">
     <tr>
         <th>
-            №:
+            №
         </th>
         <th>
-            Имя:
+            Имя
         </th>
         <th>
-            Фамилия:
+            Фамилия
         </th>
         <th>
-            Телефон:
+            Телефон
         </th>
         <th>
-            Адрес:
+            Адрес
         </th>
         <th>
-            Email:
+            Email
+        </th>
+        <th>
+            Кличка
+        </th>
+        <th>
+            Тип
+        </th>
+        <th>
+            Возраст
+        </th>
+        <th>
+            Доктор
         </th>
     </tr>
 
@@ -106,6 +118,12 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
+                @{
+                    foreach (var pet in item.Pets)
+                    {
+                        @Html.Partial("~/Views/Pets/_Index.cshtml", pet);
+                    }
+                }
             <td>
                 @Html.ActionLink("Изменить", "Edit", new { id = item.Id }) |
                 @Html.ActionLink("Подробно", "Details", new { id = item.Id }) |
