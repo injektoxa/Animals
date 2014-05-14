@@ -1,7 +1,7 @@
 ﻿@model Animals.Models.Pet
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Изменить";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -11,7 +11,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Питомец</h4>
         <hr />
@@ -19,7 +19,7 @@
         @Html.HiddenFor(model => model.Id)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Nickname, new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Кличка</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Nickname)
                 @Html.ValidationMessageFor(model => model.Nickname)
@@ -27,15 +27,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.PType, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.PType)
-                @Html.ValidationMessageFor(model => model.PType)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Species, new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Порода</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Species)
                 @Html.ValidationMessageFor(model => model.Species)
@@ -43,23 +35,20 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Age, new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Пол:</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Age)
-                @Html.ValidationMessageFor(model => model.Age)
+
+                @Html.RadioButtonFor(model => model.Gender, true, true) Мальчик
+
+                @Html.RadioButtonFor(model => model.Gender, false, false) Девочка
+
+                @Html.ValidationMessageFor(model => model.Gender)<br />
+
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Gender, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Gender)
-                @Html.ValidationMessageFor(model => model.Gender)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Castration, new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Кастрирован?</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Castration)
                 @Html.ValidationMessageFor(model => model.Castration)
@@ -67,7 +56,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Vaccination, new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Вакцинирован?</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Vaccination)
                 @Html.ValidationMessageFor(model => model.Vaccination)
@@ -75,7 +64,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Deworming, new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Дегельметизация</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Deworming)
                 @Html.ValidationMessageFor(model => model.Deworming)
@@ -83,7 +72,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Treatment__parasites, new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Обработан от паразитов?</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Treatment__parasites)
                 @Html.ValidationMessageFor(model => model.Treatment__parasites)
@@ -91,15 +80,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.OwnerId, "OwnerId", new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("OwnerId", String.Empty)
-                @Html.ValidationMessageFor(model => model.OwnerId)
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.DoctorId, "DoctorId", new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Доктор</label>
             <div class="col-md-10">
                 @Html.DropDownList("DoctorId", String.Empty)
                 @Html.ValidationMessageFor(model => model.DoctorId)
@@ -107,23 +88,23 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Date, new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Дата рождения</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Date)
-                @Html.ValidationMessageFor(model => model.Date)
+                @Html.EditorFor(model => model.BirthDate)
+                @Html.ValidationMessageFor(model => model.BirthDate)
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Сохранить" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Назад к списку", "Details", "Pets", new { id = Model.Id }, null)
 </div>
 
 @section Scripts {

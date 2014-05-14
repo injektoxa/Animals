@@ -8,7 +8,7 @@
 <h2>Подробно</h2>
 
 <div>
-    <h4>Пациенты</h4>
+    <h4>Клиент с питомцами</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -87,11 +87,12 @@
                     </td>
                     <td>
                         @{
+                            if (item.BirthDate != null)
+                            {
+                                Animals.Models.Age age = new Animals.Models.Age(item.BirthDate.Value);
 
-                Animals.Models.Age age = new Animals.Models.Age(item.BirthDate.Value);
-
-                <text> @age.Years лет, @age.Months мес. </text>
-
+                                <text> @age.Years лет, @age.Months мес. </text>
+                            }
                         }
                     </td>
                     <td>
@@ -149,6 +150,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Изменить", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Обратно к списку", "Index")
+    @Html.ActionLink("Изменить клиента", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Обратно к списку клиентов", "Index")
 </p>

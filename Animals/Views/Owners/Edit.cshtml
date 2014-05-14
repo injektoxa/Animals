@@ -1,11 +1,11 @@
 ﻿@model Animals.Models.Owner
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Изменить";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Edit</h2>
+<h2>Изменить</h2>
 
 
 @using (Html.BeginForm())
@@ -13,13 +13,13 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Owners</h4>
+        <h4>Клиент</h4>
         <hr />
         @Html.ValidationSummary(true)
         @Html.HiddenFor(model => model.Id)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Имя</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Name)
                 @Html.ValidationMessageFor(model => model.Name)
@@ -27,7 +27,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Sername, new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Фамилия</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Sername)
                 @Html.ValidationMessageFor(model => model.Sername)
@@ -35,7 +35,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Patronymic, new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Отчество</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Patronymic)
                 @Html.ValidationMessageFor(model => model.Patronymic)
@@ -43,7 +43,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Adress, new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Адрес</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Adress)
                 @Html.ValidationMessageFor(model => model.Adress)
@@ -51,7 +51,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Phone, new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Телефон</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Phone)
                 @Html.ValidationMessageFor(model => model.Phone)
@@ -59,7 +59,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Date, new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Дата регистрации</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Date)
                 @Html.ValidationMessageFor(model => model.Date)
@@ -67,7 +67,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Number, new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2">Порядковый номер</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Number)
                 @Html.ValidationMessageFor(model => model.Number)
@@ -76,14 +76,14 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Сохранить" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Назад к списку", "Index")
 </div>
 
 @section Scripts {

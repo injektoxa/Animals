@@ -53,7 +53,7 @@ namespace Animals.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Invalid username or password.");
+                    ModelState.AddModelError("", "Неправильное имя пользователя или пароль.");
                 }
             }
 

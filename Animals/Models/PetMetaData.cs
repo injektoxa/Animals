@@ -29,8 +29,7 @@ namespace Animals.Models
         [Required]
         public string DoctorId { get; set; }
 
-        [DataType(DataType.Date)]
-        [Required(ErrorMessage = "Дата рождения")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = false)]
         public string BirthDate { get; set; }
     }
 }

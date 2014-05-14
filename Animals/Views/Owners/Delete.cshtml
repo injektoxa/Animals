@@ -5,15 +5,16 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Delete</h2>
+<h2>Удалить</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Вы уверены что хотите удалить клиента со всеми питомцами?</h3>
 <div>
-    <h4>Owners</h4>
+    <h4>Клиент</h4>
     <hr />
+
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Name)
+            Имя
         </dt>
 
         <dd>
@@ -21,7 +22,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Sername)
+            Фамилия
         </dt>
 
         <dd>
@@ -29,7 +30,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Patronymic)
+            Отчество
         </dt>
 
         <dd>
@@ -37,7 +38,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Adress)
+            Адрес
         </dt>
 
         <dd>
@@ -45,7 +46,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Phone)
+            Телефон
         </dt>
 
         <dd>
@@ -53,7 +54,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Date)
+            Дата регистрации
         </dt>
 
         <dd>
@@ -61,7 +62,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Number)
+            Номер п/п
         </dt>
 
         <dd>
@@ -70,12 +71,32 @@
 
     </dl>
 
-    @using (Html.BeginForm()) {
+
+    @foreach (var p in Model.Pets)
+    {
+        <dl>
+            <dt>
+                Кличка
+            </dt>
+            <dd>
+                @p.Nickname
+            </dd>
+            <dt>
+                 Тип
+            </dt>
+            <dd>
+                @p.PType
+            </dd>
+        </dl>
+    }
+
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="Удалить" class="btn btn-default" /> |
+            @Html.ActionLink("Назад к списку", "Index")
         </div>
     }
 </div>

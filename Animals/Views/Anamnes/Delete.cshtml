@@ -1,19 +1,19 @@
 ﻿@model Animals.Models.Anamne
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Удалить";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Delete</h2>
+<h2>Удалить</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Вы точно хотите удалить анамнез?</h3>
 <div>
-    <h4>Anamnes</h4>
+    <h4>Анамнез</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Text)
+            Текст
         </dt>
 
         <dd>
@@ -21,19 +21,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Date)
+            Дата
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Date)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Pet.Nickname)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Pet.Nickname)
         </dd>
 
     </dl>
@@ -42,8 +34,8 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="Удалить" class="btn btn-default" /> |
+            @Html.ActionLink("Назад к списку", "Details", "Pets", new { id = @ViewBag.petId },null)
         </div>
     }
 </div>

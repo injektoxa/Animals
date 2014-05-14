@@ -1,11 +1,15 @@
 ﻿@model Animals.Models.Pet
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Подробно";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Подробно</h2>
+
+@Html.ActionLink("Добавить анамнес", "Create", "Anamnes", new { petId = @Model.Id },null) 
+
+
 <div>
     <h4>Питомец</h4>
     <hr />
@@ -29,7 +33,7 @@
             @Html.DisplayFor(model => model.Species)
         </dd>
         <dt>
-           Возвраст на момент приема:
+           Возвраст на приемe:
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Age)
@@ -39,10 +43,12 @@
         </dt>
         <dd>
             @{
-             Animals.Models.Age age = new Animals.Models.Age(Model.BirthDate.Value);
+                if (Model.BirthDate != null)
+                {
+                     Animals.Models.Age age = new Animals.Models.Age(Model.BirthDate.Value);
                 
-             <text> @age.Years лет, @age.Months мес. </text>
-             
+                     <text> @age.Years лет, @age.Months мес. </text>
+                }
             }
         </dd>
 
@@ -50,7 +56,14 @@
            Пол:
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Gender)
+            @if (Model.Gender)
+            {
+                <text> Мальчик </text>
+            }
+            else
+            {
+                <text> Девочка </text>
+            }
         </dd>
         <dt>
            Кастрация:
@@ -98,11 +111,12 @@
 
     @if (Model.Anamnes.Count != 0)
     {
-        <h1> Анамнес </h1>
+        <h1> Анамнез </h1>
         <table class="table">
             <tr>
                 <th>Дата</th>
                 <th>Текст</th>
+                <th></th>
             </tr>
             @foreach (var item in Model.Anamnes)
             {
@@ -112,6 +126,9 @@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Text)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Удалить", "Delete", "Anamnes", new { petId = @Model.Id , id=item.Id }, null)
                     </td>
                 </tr>
             }
@@ -276,5 +293,5 @@
 </div>
 <p>
     @Html.ActionLink("Изменить", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Назад", "Index")
+    @Html.ActionLink("Назад", "Index", "Owners",null,null)
 </p>

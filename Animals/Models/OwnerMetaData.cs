@@ -26,5 +26,8 @@ namespace Animals.Models
 
         [Required(ErrorMessage = "Заполните телефон")]
         public string Phone { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = false)]
+        public System.DateTime Date { set; get; }
     }
 }
