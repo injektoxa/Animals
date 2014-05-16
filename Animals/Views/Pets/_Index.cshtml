@@ -1,5 +1,7 @@
 ﻿@model Animals.Models.Pet
 
+<table class="pet">
+    <tr>
         <td>
             @Html.DisplayFor(modelItem => Model.Nickname)
         </td>
@@ -19,16 +21,8 @@
         <td>
             @Html.DisplayFor(modelItem => Model.Doctor.Name)
         </td>
-
-         @*@Html.ActionLink("Анамнез", "Details", "Anamnes", new { id = item.Id }, "")
-            @Html.ActionLink("Биохимический анализ крови", "Details", "Pets", new { id = item.Id }, "")
-            @Html.ActionLink("Общий анализ крови", "Details", "Pets", new { id = item.Id }, "")
-
-            @Html.ActionLink("Диагноз", "Details", "Pets", new { id = item.Id }, "")
-
-            @Html.ActionLink("Хирургическое вмешательство", "Details", "Pets", new { id = item.Id }, "")
-
-
-            @Html.ActionLink("Температурный лист", "Details", "Pets", new { id = item.Id }, "")
-            @Html.ActionLink("Лечение", "Details", "Pets", new { id = item.Id }, "")
-            @Html.ActionLink("УЗИ", "Details", "Pets", new { id = item.Id }, "")*@
+        <td>
+            @Html.ActionLink("Подробнее", "Details", "Pets", new { id = Model.Id }, null)
+        </td>
+    </tr>
+</table>

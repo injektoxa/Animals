@@ -1,11 +1,10 @@
-﻿@model Animals.Models.Pet
-
+﻿@model Animals.ViewModels.PetsVM
 @{
-    ViewBag.title = "create";
+    ViewBag.title = "Добавить";
     Layout = "~/views/shared/_layout.cshtml";
 }
 
-<h2>Create</h2>
+<h2>Добавить</h2>
 
 @section scripts
 {
@@ -31,7 +30,7 @@
 @Scripts.Render("~/bundles/jqueryval")
 }
 
-<input type="button" value="Shoot!" onclick="webcam.capture();" />
+<input type="button" value="Фото!" onclick="webcam.capture();" />
 <div id="Camera"></div>
 
 
@@ -39,118 +38,111 @@
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <h4>Pets</h4>
-        <hr />
-        @Html.ValidationSummary(true)
+   <div class="form-horizontal">
+    <h4>Питомeц</h4>
+    <hr />
 
-        <div class="form-group">
-            <div class="form-group">
-                @Html.LabelFor(model => model.Nickname, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Nickname)
-                    @Html.ValidationMessageFor(model => model.Nickname)
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.PType, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.PType)
-                    @Html.ValidationMessageFor(model => model.PType)
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Species, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Species)
-                    @Html.ValidationMessageFor(model => model.Species)
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Age, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Age)
-                    @Html.ValidationMessageFor(model => model.Age)
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Gender, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Gender)
-                    @Html.ValidationMessageFor(model => model.Gender)
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Castration, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Castration)
-                    @Html.ValidationMessageFor(model => model.Castration)
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Vaccination, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Vaccination)
-                    @Html.ValidationMessageFor(model => model.Vaccination)
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Deworming, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Deworming)
-                    @Html.ValidationMessageFor(model => model.Deworming)
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Treatment__parasites, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Treatment__parasites)
-                    @Html.ValidationMessageFor(model => model.Treatment__parasites)
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.OwnerId, "OwnerId", new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownList("OwnerId", String.Empty)
-                    @Html.ValidationMessageFor(model => model.OwnerId)
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.DoctorId, "DoctorId", new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownList("DoctorId", String.Empty)
-                    @Html.ValidationMessageFor(model => model.DoctorId)
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Date, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Date)
-                    @Html.ValidationMessageFor(model => model.Date)
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default" />
-                </div>
-            </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">Кличка:</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Pet.Nickname)
+            @Html.ValidationMessageFor(model => model.Pet.Nickname)
         </div>
     </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Вид животного:</label>
+        <div class="col-md-10">
+            @Html.DropDownList("PetTypes", new SelectList(Model.PetTypes))
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Порода:</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Pet.Species)
+            @Html.ValidationMessageFor(model => model.Pet.Species)
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Пол:</label>
+        <div class="col-md-10">
+
+            @Html.RadioButtonFor(model => model.Pet.Gender, true, true) Мальчик
+
+            @Html.RadioButtonFor(model => model.Pet.Gender, false, false) Девочка
+
+            @Html.ValidationMessageFor(model => model.Pet.Gender)<br />
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Кастрирован?</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Pet.Castration)
+            @Html.ValidationMessageFor(model => model.Pet.Castration)
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Вакцинирован?</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Pet.Vaccination)
+            @Html.ValidationMessageFor(model => model.Pet.Vaccination)
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Дегельметизирован?</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Pet.Deworming)
+            @Html.ValidationMessageFor(model => model.Pet.Deworming)
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Лечили от паразитов?</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Pet.Treatment__parasites)
+            @Html.ValidationMessageFor(model => model.Pet.Treatment__parasites)
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Доктор:</label>
+        <div class="col-md-10">
+            @Html.DropDownList("ListDoctors", new SelectList(Model.ListDoctors, "Id", "Name", "0"))
+
+            @{
+                  if (!string.IsNullOrEmpty(Model.Message))
+                    {
+                        <text> @Model.Message </text>
+                    }
+            }
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Дата рождения:</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Pet.BirthDate)
+            @Html.ValidationMessageFor(model => model.Pet.BirthDate)
+        </div>
+    </div>
+
+       @Html.HiddenFor(a=>a.Pet.OwnerId)
+       <div class="form-group">
+           <div class="col-md-offset-2 col-md-10">
+               <input type="submit" value="Добавить" class="btn btn-default" />
+           </div>
+       </div>
+</div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Назад к клиенту", "Index")
 </div>
 

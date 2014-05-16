@@ -95,6 +95,10 @@
             </div>
         </div>
 
+        @Html.HiddenFor(item => item.OwnerId)
+        @Html.HiddenFor(item => item.PType)
+        @Html.HiddenFor(item => item.Date)
+
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Сохранить" class="btn btn-default" />

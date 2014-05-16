@@ -201,6 +201,7 @@
     <Compile Include="Models\DoctorForDDl.cs" />
     <Compile Include="Models\OwnerMetaData.cs" />
     <Compile Include="Models\PetMetaData.cs" />
+    <Compile Include="Models\Populater.cs" />
     <Compile Include="ViewModels\ClientsWithPetsVM.cs" />
     <Compile Include="Models\Common_analysis_of_blood.cs">
       <DependentUpon>AnimalsDM.tt</DependentUpon>
@@ -253,10 +254,13 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\PetsVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\cell-blue.jpg" />
+    <Content Include="Content\cell-grey.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -322,15 +326,14 @@
     <Content Include="Views\Doctors\Index.cshtml" />
     <Content Include="Views\Owners\Create.cshtml" />
     <Content Include="Views\Owners\Delete.cshtml" />
-    <Content Include="Views\Owners\Details.cshtml" />
     <Content Include="Views\Owners\Edit.cshtml" />
     <Content Include="Views\Owners\Index.cshtml" />
     <Content Include="Views\Pets\Create.cshtml" />
-    <Content Include="Views\Pets\Delete.cshtml" />
     <Content Include="Views\Pets\Details.cshtml" />
     <Content Include="Views\Pets\Edit.cshtml" />
     <Content Include="Views\Anamnes\Create.cshtml" />
     <Content Include="Views\Pets\_Index.cshtml" />
+    <Content Include="Views\Pets\_Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

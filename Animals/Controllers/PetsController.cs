@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.IO;
 using Animals.Models;
+using Animals.ViewModels;
 
 namespace Animals.Controllers
 {
@@ -16,40 +17,52 @@ namespace Animals.Controllers
 
         private AnimalsEntities db = new AnimalsEntities();
 
-        // GET: /Pets/
-        public ActionResult Index()
-        {
-            var pets = db.Pets.Include(p => p.Doctor).Include(p => p.Owner);
-            return View(pets.ToList());
-        }
-
-        // GET: /Pets/Details/5
-        public ActionResult Details(Guid? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Pet pet = db.Pets.Find(id);
-            if (pet == null)
-            {
-                return HttpNotFound();
-            }
-
-
-
-
-            return View(pet);
-        }
-
-
         // GET: /Pets/Create
-        public ActionResult Create()
+        public ActionResult Create(Guid? id)
         {
-            ViewBag.DoctorId = new SelectList(db.Doctors, "Id", "Name");
-            ViewBag.OwnerId = new SelectList(db.Owners, "Id", "Name");
-            return View();
+            PetsVM petVm = new PetsVM();
+            petVm.Pet = new Pet();
+            petVm.Pet.OwnerId = (Guid)id;  
+
+            Populater populate = new Populater();
+            petVm.PetTypes = populate.PopulatePetTypesList();
+            petVm.ListDoctors = populate.PopulateDoctorsList(db);
+
+            return View(petVm);
         }
+
+        // POST: /Pets/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "Pet,ListDoctors,PetTypes")] PetsVM petvm)
+        {
+           string petType = ((string[])(petvm.PetTypes))[0];
+            Guid doctorId = new Guid(((string[])(petvm.ListDoctors))[0]);
+
+            if (petType != "--Выберите тип--" && Guid.Empty != doctorId)
+            {
+                if (ModelState.IsValid)
+                {
+                    Pet pet = petvm.Pet;
+                    pet.Id = Guid.NewGuid();
+                    pet.Date = DateTime.Now;
+                    pet.PType = petType;
+                    pet.DoctorId = doctorId;
+                    pet.OwnerId = petvm.Pet.OwnerId;
+                    db.Pets.Add(pet);
+                    db.SaveChanges();
+
+                    return RedirectToAction("Details", "Pets", new { id = pet.Id });
+                }
+            }
+
+            //ViewBag.DoctorId = new SelectList(db.Doctors, "Id", "Name", pet.DoctorId);
+            //ViewBag.OwnerId = new SelectList(db.Owners, "Id", "Name", pet.OwnerId);
+            return View(petvm);
+        }
+
 
         public void Capture()
         {
@@ -67,6 +80,22 @@ namespace Animals.Controllers
             System.IO.File.WriteAllBytes(path, String_To_Bytes2(dump));
         }
 
+        // GET: /Pets/Details/5
+        public ActionResult Details(Guid? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Pet pet = db.Pets.Find(id);
+            if (pet == null)
+            {
+                return HttpNotFound();
+            }
+            
+            return View(pet);
+        }
+
         private byte[] String_To_Bytes2(string strInput)
         {
             int numBytes = (strInput.Length) / 2;
@@ -78,26 +107,6 @@ namespace Animals.Controllers
             }
 
             return bytes;
-        }
-
-        // POST: /Pets/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="Id,Nickname,PType,Species,Age,Gender,Castration,Vaccination,Deworming,Treatment__parasites,OwnerId,DoctorId,Date")] Pet pet)
-        {
-            if (ModelState.IsValid)
-            {
-                pet.Id = Guid.NewGuid();
-                db.Pets.Add(pet);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.DoctorId = new SelectList(db.Doctors, "Id", "Name", pet.DoctorId);
-            ViewBag.OwnerId = new SelectList(db.Owners, "Id", "Name", pet.OwnerId);
-            return View(pet);
         }
 
         // GET: /Pets/Edit/5
@@ -112,8 +121,9 @@ namespace Animals.Controllers
             {
                 return HttpNotFound();
             }
+
             ViewBag.DoctorId = new SelectList(db.Doctors, "Id", "Name", pets.DoctorId);
-            ViewBag.OwnerId = new SelectList(db.Owners, "Id", "Name", pets.OwnerId);
+
             return View(pets);
         }
 
@@ -122,43 +132,17 @@ namespace Animals.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="Id,Nickname,PType,Species,Age,Gender,Castration,Vaccination,Deworming,Treatment__parasites,OwnerId,DoctorId,Date")] Pet pet)
+        public ActionResult Edit([Bind(Include = "Id,Nickname,PType,Species,Age,Gender,Castration,Vaccination,Deworming,Treatment__parasites,OwnerId,DoctorId,Date,OwnerId,BirthDate")] Pet pet)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(pet).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", new { id = pet.Id });
             }
             ViewBag.DoctorId = new SelectList(db.Doctors, "Id", "Name", pet.DoctorId);
             ViewBag.OwnerId = new SelectList(db.Owners, "Id", "Name", pet.OwnerId);
             return View(pet);
-        }
-
-        // GET: /Pets/Delete/5
-        public ActionResult Delete(Guid? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Pet pets = db.Pets.Find(id);
-            if (pets == null)
-            {
-                return HttpNotFound();
-            }
-            return View(pets);
-        }
-
-        // POST: /Pets/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(Guid id)
-        {
-            Pet pet = db.Pets.Find(id);
-            db.Pets.Remove(pet);
-            db.SaveChanges();
-            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)

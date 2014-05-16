@@ -7,8 +7,14 @@
 
 <h2>Подробно</h2>
 
-@Html.ActionLink("Добавить анамнес", "Create", "Anamnes", new { petId = @Model.Id },null) 
-
+@Html.ActionLink("Добавить анамнес", "Create", "Anamnes", new { petId = @Model.Id },null) <br/>
+@Html.ActionLink("Добавить биохимический анализ крови", "Create", "Anamnes", new { petId = @Model.Id }, null) <br />
+@Html.ActionLink("Добавить общий анализ крови", "Create", "Anamnes", new { petId = @Model.Id }, null)<br/>
+@Html.ActionLink("Диагноз", "Create", "Anamnes", new { petId = @Model.Id }, null)<br/>
+@Html.ActionLink("Хирургическое вмешательство", "Create", "Anamnes", new { petId = @Model.Id }, null)<br/>
+@Html.ActionLink("Температурный лист", "Create", "Anamnes", new { petId = @Model.Id }, null)<br/>
+@Html.ActionLink("Лечение", "Create", "Anamnes", new { petId = @Model.Id }, null)<br/>
+@Html.ActionLink("УЗИ", "Create", "Anamnes", new { petId = @Model.Id }, null)
 
 <div>
     <h4>Питомец</h4>
