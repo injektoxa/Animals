@@ -7,17 +7,23 @@ using System.Net;
 using System.Web;
 using Animals.Models;
 using System.Web.Mvc;
+using Animals.Repository;
 
 namespace Animals.Controllers
 {
     public class DoctorsController : Controller
     {
-        private AnimalsEntities db = new AnimalsEntities();
+        private readonly IRepository<Doctor> _doctorRepository;
+
+        public DoctorsController(IRepository<Doctor> docRepository)
+        {
+            this._doctorRepository = docRepository;
+        }
 
         // GET: /Doctors/
         public ActionResult Index()
         {
-            return View(db.Doctors.ToList());
+            return View(_doctorRepository.FindAll().ToList());
         }
 
         // GET: /Doctors/Details/5
@@ -27,7 +33,10 @@ namespace Animals.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Doctor doctor = db.Doctors.Find(id);
+
+            Guid idGuid = (Guid)id;
+
+            Doctor doctor = _doctorRepository.Find(idGuid);
             if (doctor == null)
             {
                 return HttpNotFound();
@@ -51,8 +60,8 @@ namespace Animals.Controllers
             if (ModelState.IsValid)
             {
                 doctor.Id = Guid.NewGuid();
-                db.Doctors.Add(doctor);
-                db.SaveChanges();
+                _doctorRepository.Add(doctor);
+                _doctorRepository.SaveAll();
                 return RedirectToAction("Index");
             }
 
@@ -66,7 +75,10 @@ namespace Animals.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Doctor doctor = db.Doctors.Find(id);
+
+            Guid idGuid = (Guid)id;
+            Doctor doctor = _doctorRepository.Find(idGuid);
+            
             if (doctor == null)
             {
                 return HttpNotFound();
@@ -83,8 +95,9 @@ namespace Animals.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(doctor).State = EntityState.Modified;
-                db.SaveChanges();
+                _doctorRepository.Update(doctor);
+                _doctorRepository.SaveAll();
+
                 return RedirectToAction("Index");
             }
             return View(doctor);
@@ -97,7 +110,10 @@ namespace Animals.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Doctor doctor = db.Doctors.Find(id);
+
+            Guid idGuid = (Guid)id;
+            Doctor doctor = _doctorRepository.Find(idGuid);
+            
             if (doctor == null)
             {
                 return HttpNotFound();
@@ -110,19 +126,11 @@ namespace Animals.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(Guid id)
         {
-            Doctor doctor = db.Doctors.Find(id);
-            db.Doctors.Remove(doctor);
-            db.SaveChanges();
+            Doctor doctor = _doctorRepository.Find(id);
+            _doctorRepository.Delete(doctor);
+            _doctorRepository.SaveAll();
+            
             return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }

@@ -82,21 +82,28 @@
         <div class="form-group">
             <label class="control-label col-md-2">Доктор</label>
             <div class="col-md-10">
-                @Html.DropDownList("DoctorId", String.Empty)
-                @Html.ValidationMessageFor(model => model.DoctorId)
-            </div>
+                @Html.Label("DoctorName",(string)ViewBag.DoctorName)
+             </div>
         </div>
 
         <div class="form-group">
+            <label class="control-label col-md-2">Вид</label>
+            <div class="col-md-10">
+                @Html.Label("PetType",(string)ViewBag.PetType)
+            </div>
+        </div>
+
+        @*<div class="form-group">
             <label class="control-label col-md-2">Дата рождения</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.BirthDate)
                 @Html.ValidationMessageFor(model => model.BirthDate)
             </div>
-        </div>
-
+        </div>*@
+        @Html.HiddenFor(item => item.BirthDate)
         @Html.HiddenFor(item => item.OwnerId)
         @Html.HiddenFor(item => item.PType)
+        @Html.HiddenFor(item => item.DoctorId)
         @Html.HiddenFor(item => item.Date)
 
         <div class="form-group">

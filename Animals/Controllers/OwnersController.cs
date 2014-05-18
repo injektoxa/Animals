@@ -1,4 +1,5 @@
 ﻿using Animals.Models;
+using Animals.Repository;
 using Animals.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -11,17 +12,24 @@ using System.Web.Mvc;
 
 namespace Animals.Controllers
 {
-
-
     //[Authorize]
     public class OwnersController : Controller
     {
-        private AnimalsEntities db = new AnimalsEntities();
+        private readonly IRepository<Owner> _ownerRepository;
+        private readonly IRepository<Pet> _petRepository;
+        private readonly IRepository<Doctor> _doctorRepository;
+
+        public OwnersController(IRepository<Owner> ownerRepository, IRepository<Pet> petRepository, IRepository<Doctor> docRepository)
+        {
+            this._ownerRepository = ownerRepository;
+            this._petRepository = petRepository;
+            this._doctorRepository = docRepository;
+        }
 
         // GET: /Owners/
         public ActionResult Index(string searchPet, string searchPhone, string searchAddress, string searchSername, string searchBreed, string searchNumber)
         {
-            IEnumerable<Owner> allOwners = db.Owners;
+            IEnumerable<Owner> allOwners = _ownerRepository.FindAll();
 
             if (string.IsNullOrEmpty(searchPet)
                 && string.IsNullOrEmpty(searchPhone)
@@ -145,7 +153,11 @@ namespace Animals.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Owner owner = db.Owners.Find(id);
+
+            Guid idGuid = (Guid)id;
+
+            Owner owner = _ownerRepository.Find(idGuid);
+
             if (owner == null)
             {
                 return HttpNotFound();
@@ -162,7 +174,7 @@ namespace Animals.Controllers
             Populater populater = new Populater();
 
             clientPetsVm.PetTypes = populater.PopulatePetTypesList();
-            clientPetsVm.ListDoctors = populater.PopulateDoctorsList(db);
+            clientPetsVm.ListDoctors = populater.PopulateDoctorsList(_doctorRepository.FindAll().ToList());
 
             return View(clientPetsVm);
         }
@@ -183,8 +195,9 @@ namespace Animals.Controllers
 
                 owner.Id = Guid.NewGuid();
                 owner.Date = DateTime.Now;
-                db.Owners.Add(owner);
-                db.SaveChanges();
+
+                _ownerRepository.Add(owner);
+                _ownerRepository.SaveAll();
 
                 Pet pet = ownerWithClient.Pet;
                 pet.OwnerId = owner.Id;
@@ -192,8 +205,8 @@ namespace Animals.Controllers
                 pet.Date = DateTime.Now;
                 pet.PType = petType;
                 pet.DoctorId = doctorId;
-                db.Pets.Add(pet);
-                db.SaveChanges();
+                _petRepository.Add(pet);
+                _petRepository.SaveAll();
 
                 return RedirectToAction("Index", "Owners");
             }
@@ -202,7 +215,7 @@ namespace Animals.Controllers
 
             ClientsWithPetsVM clientPetsVm = new ClientsWithPetsVM();
             clientPetsVm.PetTypes = populater.PopulatePetTypesList();
-            clientPetsVm.ListDoctors = populater.PopulateDoctorsList(db);
+            clientPetsVm.ListDoctors = populater.PopulateDoctorsList(_doctorRepository.FindAll().ToList());
             clientPetsVm.Message = "Доктор или тип животного не выбран";
 
             return View(clientPetsVm);
@@ -215,7 +228,10 @@ namespace Animals.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Owner owners = db.Owners.Find(id);
+
+            Guid idGuid = (Guid)id;
+            Owner owners = _ownerRepository.Find(idGuid);
+            
             if (owners == null)
             {
                 return HttpNotFound();
@@ -228,12 +244,14 @@ namespace Animals.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Sername,Patronymic,Adress,Phone,Date,Number")] Owner owner)
+        public ActionResult Edit([Bind(Include = "Id,Name,Sername,Patronymic,Adress,Email,Phone,Date,Number")] Owner owner)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(owner).State = EntityState.Modified;
-                db.SaveChanges();
+                _ownerRepository.Update(owner);
+
+                _ownerRepository.SaveAll();
+                
                 return RedirectToAction("Index");
             }
             return View(owner);
@@ -246,7 +264,10 @@ namespace Animals.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Owner owner = db.Owners.Find(id);
+
+            Guid idGuid = (Guid)id;
+            Owner owner = _ownerRepository.Find(idGuid);
+
             if (owner == null)
             {
                 return HttpNotFound();
@@ -259,30 +280,14 @@ namespace Animals.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(Guid id)
         {
-            Owner owner = db.Owners.Find(id);
+            Guid idGuid = (Guid)id;
 
-            var pets = db.Pets.ToList().Where(p => p.OwnerId == id).ToList();
+            Owner owner = _ownerRepository.Find(id);
 
-            if (pets != null)
-            {
-                for (int i = 0; i < pets.Count(); i++)
-                {
-                    db.Pets.Remove(pets[i]);
-                }
-            }
-
-            db.Owners.Remove(owner);
-            db.SaveChanges();
+            _ownerRepository.Delete(owner);
+            _ownerRepository.SaveAll();
+          
             return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }

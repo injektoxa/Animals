@@ -23,16 +23,16 @@ namespace Animals.Models
             };
         }
 
-        public List<DoctorForDDl> PopulateDoctorsList(AnimalsEntities db)
+        public List<DoctorForDDl> PopulateDoctorsList(List<Doctor> doctors)
         {
             List<DoctorForDDl> doctorsList = new List<DoctorForDDl>();
             DoctorForDDl doctor = new DoctorForDDl();
             doctor.Id = Guid.Empty;
-            doctor.Name = "---Выберите доктора---";
+            doctor.Name = "--Выберите доктора--";
 
             doctorsList.Add(doctor);
 
-            foreach (var i in db.Doctors)
+            foreach (var i in doctors)
             {
                 DoctorForDDl doc = new DoctorForDDl();
                 doc.Id = i.Id;

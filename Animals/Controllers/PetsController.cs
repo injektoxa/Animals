@@ -1,22 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using System.IO;
 using Animals.Models;
 using Animals.ViewModels;
+using Animals.Repository;
 
 namespace Animals.Controllers
 {
     public class PetsController : Controller
     {
-
-        private AnimalsEntities db = new AnimalsEntities();
-
+        private readonly IRepository<Pet> _petRepository;
+        private readonly IRepository<Doctor> _doctorRepository;
+        
+        public PetsController(IRepository<Pet> petRepository, IRepository<Doctor> doctorRepository)
+        {
+            _petRepository = petRepository;
+            _doctorRepository = doctorRepository;
+        }
+        
         // GET: /Pets/Create
         public ActionResult Create(Guid? id)
         {
@@ -26,7 +29,7 @@ namespace Animals.Controllers
 
             Populater populate = new Populater();
             petVm.PetTypes = populate.PopulatePetTypesList();
-            petVm.ListDoctors = populate.PopulateDoctorsList(db);
+            petVm.ListDoctors = populate.PopulateDoctorsList(_doctorRepository.FindAll().ToList());
 
             return View(petVm);
         }
@@ -51,15 +54,14 @@ namespace Animals.Controllers
                     pet.PType = petType;
                     pet.DoctorId = doctorId;
                     pet.OwnerId = petvm.Pet.OwnerId;
-                    db.Pets.Add(pet);
-                    db.SaveChanges();
-
+                    
+                    _petRepository.Add(pet);
+                    _petRepository.SaveAll();
+                    
                     return RedirectToAction("Details", "Pets", new { id = pet.Id });
                 }
             }
 
-            //ViewBag.DoctorId = new SelectList(db.Doctors, "Id", "Name", pet.DoctorId);
-            //ViewBag.OwnerId = new SelectList(db.Owners, "Id", "Name", pet.OwnerId);
             return View(petvm);
         }
 
@@ -87,7 +89,11 @@ namespace Animals.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Pet pet = db.Pets.Find(id);
+
+            Guid idGuid = (Guid)id;
+
+            Pet pet = _petRepository.Find(idGuid);
+
             if (pet == null)
             {
                 return HttpNotFound();
@@ -116,15 +122,19 @@ namespace Animals.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Pet pets = db.Pets.Find(id);
-            if (pets == null)
+
+            Guid idGuid = (Guid)id;
+            Pet pet = _petRepository.Find(idGuid);
+
+            ViewBag.PetType = pet.PType;
+            ViewBag.DoctorName = pet.Doctor.Name;
+            
+            if (pet == null)
             {
                 return HttpNotFound();
             }
 
-            ViewBag.DoctorId = new SelectList(db.Doctors, "Id", "Name", pets.DoctorId);
-
-            return View(pets);
+            return View(pet);
         }
 
         // POST: /Pets/Edit/5
@@ -136,22 +146,14 @@ namespace Animals.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(pet).State = EntityState.Modified;
-                db.SaveChanges();
+                _petRepository.Update(pet);
+                _petRepository.SaveAll();
+
                 return RedirectToAction("Details", new { id = pet.Id });
             }
-            ViewBag.DoctorId = new SelectList(db.Doctors, "Id", "Name", pet.DoctorId);
-            ViewBag.OwnerId = new SelectList(db.Owners, "Id", "Name", pet.OwnerId);
+            //ViewBag.DoctorId = new SelectList(db.Doctors, "Id", "Name", pet.DoctorId);
+            //ViewBag.OwnerId = new SelectList(db.Owners, "Id", "Name", pet.OwnerId);
             return View(pet);
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }

@@ -16,5 +16,9 @@ namespace Animals.ViewModels
         public IEnumerable ListDoctors { set; get; }
 
         public string Message { set; get; }
+
+        public string DoctorName { set; get; }
+
+        public string PetType { set; get; }
     }
 }
