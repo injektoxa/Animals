@@ -6,9 +6,11 @@ using System.IO;
 using Animals.Models;
 using Animals.ViewModels;
 using Animals.Repository;
+using Animals.Extansions;
 
 namespace Animals.Controllers
 {
+    [Authorize]
     public class PetsController : Controller
     {
         private readonly IRepository<Pet> _petRepository;
@@ -20,12 +22,11 @@ namespace Animals.Controllers
             _doctorRepository = doctorRepository;
         }
         
-        // GET: /Pets/Create
         public ActionResult Create(Guid? id)
         {
             PetsVM petVm = new PetsVM();
             petVm.Pet = new Pet();
-            petVm.Pet.OwnerId = (Guid)id;  
+            petVm.Pet.OwnerId = id.ToGuid();  
 
             Populater populate = new Populater();
             petVm.PetTypes = populate.PopulatePetTypesList();
@@ -34,9 +35,6 @@ namespace Animals.Controllers
             return View(petVm);
         }
 
-        // POST: /Pets/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Pet,ListDoctors,PetTypes")] PetsVM petvm)
@@ -90,9 +88,7 @@ namespace Animals.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Guid idGuid = (Guid)id;
-
-            Pet pet = _petRepository.Find(idGuid);
+            Pet pet = _petRepository.Find(id.ToGuid());
 
             if (pet == null)
             {
@@ -115,7 +111,6 @@ namespace Animals.Controllers
             return bytes;
         }
 
-        // GET: /Pets/Edit/5
         public ActionResult Edit(Guid? id)
         {
             if (id == null)
@@ -123,8 +118,7 @@ namespace Animals.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Guid idGuid = (Guid)id;
-            Pet pet = _petRepository.Find(idGuid);
+            Pet pet = _petRepository.Find(id.ToGuid());
 
             ViewBag.PetType = pet.PType;
             ViewBag.DoctorName = pet.Doctor.Name;
@@ -137,9 +131,6 @@ namespace Animals.Controllers
             return View(pet);
         }
 
-        // POST: /Pets/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Nickname,PType,Species,Age,Gender,Castration,Vaccination,Deworming,Treatment__parasites,OwnerId,DoctorId,Date,OwnerId,BirthDate")] Pet pet)
@@ -151,8 +142,7 @@ namespace Animals.Controllers
 
                 return RedirectToAction("Details", new { id = pet.Id });
             }
-            //ViewBag.DoctorId = new SelectList(db.Doctors, "Id", "Name", pet.DoctorId);
-            //ViewBag.OwnerId = new SelectList(db.Owners, "Id", "Name", pet.OwnerId);
+       
             return View(pet);
         }
     }

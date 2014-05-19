@@ -3,6 +3,7 @@ using Microsoft.Practices.Unity;
 using Unity.Mvc5;
 using Animals.Repository;
 using Animals.Models;
+using Animals.Controllers;
 
 namespace Animals
 {
@@ -15,12 +16,12 @@ namespace Animals
             container.RegisterType<IRepository<Owner>, SQLRepository<Owner>>();
             container.RegisterType<IRepository<Pet>, SQLRepository<Pet>>();
             container.RegisterType<IRepository<Doctor>, SQLRepository<Doctor>>();
+            container.RegisterType<IRepository<Anamne>, SQLRepository<Anamne>>();
+            container.RegisterType<IRepository<Diagnostic>, SQLRepository<Diagnostic>>();
+            container.RegisterType<IRepository<Surgical_treatment>, SQLRepository<Surgical_treatment>>();
+            container.RegisterType<IRepository<Treatment>, SQLRepository<Treatment>>();
+            container.RegisterType<AccountController>(new InjectionConstructor());
 
-            // register all your components with the container here
-            // it is NOT necessary to register your controllers
-            
-            // e.g. container.RegisterType<ITestService, TestService>();
-            
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }
     }

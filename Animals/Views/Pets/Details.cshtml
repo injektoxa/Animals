@@ -8,13 +8,13 @@
 <h2>Подробно</h2>
 
 @Html.ActionLink("Добавить анамнес", "Create", "Anamnes", new { petId = @Model.Id },null) <br/>
-@Html.ActionLink("Добавить биохимический анализ крови", "Create", "Anamnes", new { petId = @Model.Id }, null) <br />
-@Html.ActionLink("Добавить общий анализ крови", "Create", "Anamnes", new { petId = @Model.Id }, null)<br/>
-@Html.ActionLink("Диагноз", "Create", "Anamnes", new { petId = @Model.Id }, null)<br/>
-@Html.ActionLink("Хирургическое вмешательство", "Create", "Anamnes", new { petId = @Model.Id }, null)<br/>
-@Html.ActionLink("Температурный лист", "Create", "Anamnes", new { petId = @Model.Id }, null)<br/>
-@Html.ActionLink("Лечение", "Create", "Anamnes", new { petId = @Model.Id }, null)<br/>
-@Html.ActionLink("УЗИ", "Create", "Anamnes", new { petId = @Model.Id }, null)
+@*@Html.ActionLink("Добавить биохимический анализ крови", "Create", "Anamnes", new { petId = @Model.Id }, null) <br />
+@Html.ActionLink("Добавить общий анализ крови", "Create", "Anamnes", new { petId = @Model.Id }, null)<br/>*@
+@Html.ActionLink("Добавить диагноз", "Create", "Diagnosis", new { petId = @Model.Id }, null)<br/>
+@Html.ActionLink("Хирургическое вмешательство", "Create", "Surgical", new { petId = @Model.Id }, null)<br/>
+@*@Html.ActionLink("Температурный лист", "Create", "Anamnes", new { petId = @Model.Id }, null)<br/>*@
+@Html.ActionLink("Лечение", "Create", "Treatments", new { petId = @Model.Id }, null)<br/>
+@*@Html.ActionLink("УЗИ", "Create", "Anamnes", new { petId = @Model.Id }, null)*@
 
 <div>
     <h4>Питомец</h4>
@@ -141,7 +141,7 @@
         </table>
     }
 
-    @if (Model.Biochemical_analysis_of_blood.Count != 0)
+    @*@if (Model.Biochemical_analysis_of_blood.Count != 0)
     {
         <h1> Биохимический анализ крови </h1>
         <table class="table">
@@ -215,7 +215,7 @@
                 </tr>
             }
         </table>
-    }
+    }*@
 
 
     @if (Model.Diagnostics.Count != 0)
@@ -225,6 +225,7 @@
             <tr>
                 <th>Дата</th>
                 <th>Текст</th>
+                <th> </th>
             </tr>
 
             @foreach (var item in Model.Diagnostics)
@@ -235,6 +236,9 @@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Text)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Удалить", "Delete", "Diagnosis", new { petId = @Model.Id, id = item.Id }, null)
                     </td>
                 </tr>
             }
@@ -249,6 +253,7 @@
             <tr>
                 <th>Дата</th>
                 <th>Текст</th>
+                <th></th>
             </tr>
 
             @foreach (var item in Model.Surgical_treatments)
@@ -260,12 +265,15 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.Text)
                     </td>
+                    <td>
+                        @Html.ActionLink("Удалить", "Delete", "Surgical", new { petId = @Model.Id, id = item.Id }, null)
+                    </td>
                 </tr>
             }
         </table>
     }
 
-    @if (Model.TemperatureLists.Count != 0)
+    @*@if (Model.TemperatureLists.Count != 0)
     {
         <h1> Температурный лист </h1>
         <table class="table">
@@ -290,6 +298,32 @@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Breath)
+                    </td>
+                </tr>
+            }
+        </table>
+    }*@
+    
+    @if (Model.Treatments.Count != 0)
+    {
+        <h1> Лечение </h1>
+        <table class="table">
+            <tr>
+                <th>Дата</th>
+                <th>Текст</th>
+                <th></th>
+            </tr>
+            @foreach (var item in Model.Treatments)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Text)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Удалить", "Delete", "Treatments", new { petId = @Model.Id, id = item.Id }, null)
                     </td>
                 </tr>
             }

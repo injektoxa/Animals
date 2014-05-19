@@ -12,7 +12,6 @@ using Animals.Models;
 
 namespace Animals.Controllers
 {
-    [Authorize]
     public class AccountController : Controller
     {
         public AccountController()

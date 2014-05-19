@@ -3,16 +3,14 @@ using Animals.Repository;
 using Animals.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
+using Animals.Extansions;
 
 namespace Animals.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class OwnersController : Controller
     {
         private readonly IRepository<Owner> _ownerRepository;
@@ -26,7 +24,6 @@ namespace Animals.Controllers
             this._doctorRepository = docRepository;
         }
 
-        // GET: /Owners/
         public ActionResult Index(string searchPet, string searchPhone, string searchAddress, string searchSername, string searchBreed, string searchNumber)
         {
             IEnumerable<Owner> allOwners = _ownerRepository.FindAll();
@@ -146,7 +143,6 @@ namespace Animals.Controllers
             return allOwners.Where(o => o.Date > dtMonthAgo).OrderByDescending(a => a.Number);
         }
 
-        // GET: /Owner/Details/5
         public ActionResult Details(Guid? id)
         {
             if (id == null)
@@ -154,9 +150,7 @@ namespace Animals.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Guid idGuid = (Guid)id;
-
-            Owner owner = _ownerRepository.Find(idGuid);
+            Owner owner = _ownerRepository.Find(id.ToGuid());
 
             if (owner == null)
             {
@@ -229,8 +223,7 @@ namespace Animals.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Guid idGuid = (Guid)id;
-            Owner owners = _ownerRepository.Find(idGuid);
+            Owner owners = _ownerRepository.Find(id.ToGuid());
             
             if (owners == null)
             {
@@ -264,9 +257,8 @@ namespace Animals.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
-            Guid idGuid = (Guid)id;
-            Owner owner = _ownerRepository.Find(idGuid);
+            
+            Owner owner = _ownerRepository.Find(id.ToGuid());
 
             if (owner == null)
             {
@@ -280,8 +272,6 @@ namespace Animals.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(Guid id)
         {
-            Guid idGuid = (Guid)id;
-
             Owner owner = _ownerRepository.Find(id);
 
             _ownerRepository.Delete(owner);

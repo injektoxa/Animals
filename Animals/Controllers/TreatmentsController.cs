@@ -8,13 +8,13 @@ using Animals.Extansions;
 namespace Animals.Controllers
 {
     [Authorize]
-    public class AnamnesController : Controller
+    public class TreatmentsController : Controller
     {
-        private readonly IRepository<Anamne> _anamnesRepository;
+        private readonly IRepository<Treatment> _treatmentRepository;
 
-        public AnamnesController(IRepository<Anamne> anamnesRepository)
+        public TreatmentsController(IRepository<Treatment> treatmentRepository)
         {
-            this._anamnesRepository = anamnesRepository;
+            this._treatmentRepository = treatmentRepository;
         }
 
         public ActionResult Create(Guid? petId)
@@ -23,22 +23,24 @@ namespace Animals.Controllers
 
             return View();
         }
-        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Text,PetId,Date")] Anamne anamnes)
+        public ActionResult Create([Bind(Include="Id,PetId,Text,Date")] Treatment treatment)
         {
             if (ModelState.IsValid)
             {
-                anamnes.Id = Guid.NewGuid();
-                anamnes.Date = DateTime.Now;
-                _anamnesRepository.Add(anamnes);
-                _anamnesRepository.SaveAll();
-                return RedirectToAction("Details", "Pets", new { id = anamnes.PetId });
+                treatment.Id = Guid.NewGuid();
+                treatment.Date = DateTime.Now;
+
+                _treatmentRepository.Add(treatment);
+                _treatmentRepository.SaveAll();
+                return RedirectToAction("Details", "Pets", new { id = treatment.PetId });
             }
 
-            return View(anamnes);
+            return View(treatment);
         }
+
 
         public ActionResult Delete(Guid? id, Guid petId)
         {
@@ -46,16 +48,15 @@ namespace Animals.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
-            Anamne anamnes = _anamnesRepository.Find(id.ToGuid());
-            if (anamnes == null)
+            Treatment treatment = _treatmentRepository.Find(id.ToGuid());
+            if (treatment == null)
             {
                 return HttpNotFound();
             }
 
             ViewBag.petId = petId;
 
-            return View(anamnes);
+            return View(treatment);
         }
 
         [HttpPost, ActionName("Delete")]
@@ -64,10 +65,9 @@ namespace Animals.Controllers
         {
             string petId = Request["petId"];
 
-            Anamne anamnes = _anamnesRepository.Find(id);
-            
-            _anamnesRepository.Delete(anamnes);
-            _anamnesRepository.SaveAll();
+            Treatment treatment = _treatmentRepository.Find(id);
+            _treatmentRepository.Delete(treatment);
+            _treatmentRepository.SaveAll();
             
             return RedirectToAction("Details", "Pets", new { id = petId });
         }

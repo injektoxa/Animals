@@ -1,0 +1,42 @@
+﻿@model Animals.Models.Diagnostic
+
+@{
+    ViewBag.Title = "Удалить";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Удалить</h2>
+
+<h3>Вы точно хотите удалить диагноз?</h3>
+<div>
+    <h4>Диагноз</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            Дата
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+
+        <dt>
+            Текст
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Text)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Удалить" class="btn btn-default" /> |
+            @Html.ActionLink("Назад к списку", "Details", "Pets", new { id = @ViewBag.petId }, null)
+        </div>
+    }
+</div>

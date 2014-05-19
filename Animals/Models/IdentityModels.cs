@@ -17,5 +17,11 @@ namespace Animals.Models
         public System.Data.Entity.DbSet<Animals.Models.Anamne> Anamnes { get; set; }
 
         public System.Data.Entity.DbSet<Animals.Models.Pet> Pets { get; set; }
+
+        public System.Data.Entity.DbSet<Animals.Models.Diagnostic> Diagnostics { get; set; }
+
+        public System.Data.Entity.DbSet<Animals.Models.Surgical_treatment> Surgical_treatment { get; set; }
+
+        public System.Data.Entity.DbSet<Animals.Models.Treatment> Treatments { get; set; }
     }
 }
