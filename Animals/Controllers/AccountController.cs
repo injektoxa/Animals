@@ -371,7 +371,7 @@ namespace Animals.Controllers
             }
             else
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Owners");
             }
         }
 
