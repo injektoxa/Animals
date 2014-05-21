@@ -1,0 +1,123 @@
+﻿@model Animals.Models.Pet
+
+@{
+    ViewBag.Title = "Изменить";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Изменить</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Питомец</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Кличка</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Nickname)
+                @Html.ValidationMessageFor(model => model.Nickname)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Порода</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Species)
+                @Html.ValidationMessageFor(model => model.Species)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Пол:</label>
+            <div class="col-md-10">
+
+                @Html.RadioButtonFor(model => model.Gender, true, true) Мальчик
+
+                @Html.RadioButtonFor(model => model.Gender, false, false) Девочка
+
+                @Html.ValidationMessageFor(model => model.Gender)<br />
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Кастрирован?</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Castration)
+                @Html.ValidationMessageFor(model => model.Castration)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Вакцинирован?</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Vaccination)
+                @Html.ValidationMessageFor(model => model.Vaccination)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Дегельметизация</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Deworming)
+                @Html.ValidationMessageFor(model => model.Deworming)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Обработан от паразитов?</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Treatment__parasites)
+                @Html.ValidationMessageFor(model => model.Treatment__parasites)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Доктор</label>
+            <div class="col-md-10">
+                @Html.Label("DoctorName",(string)ViewBag.DoctorName)
+             </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Вид</label>
+            <div class="col-md-10">
+                @Html.Label("PetType",(string)ViewBag.PetType)
+            </div>
+        </div>
+
+        @*<div class="form-group">
+            <label class="control-label col-md-2">Дата рождения</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.BirthDate)
+                @Html.ValidationMessageFor(model => model.BirthDate)
+            </div>
+        </div>*@
+        @Html.HiddenFor(item => item.BirthDate)
+        @Html.HiddenFor(item => item.OwnerId)
+        @Html.HiddenFor(item => item.PType)
+        @Html.HiddenFor(item => item.DoctorId)
+        @Html.HiddenFor(item => item.Date)
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Сохранить" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Назад к списку", "Details", "Pets", new { id = Model.Id }, null)
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

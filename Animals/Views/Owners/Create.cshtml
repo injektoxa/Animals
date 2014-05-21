@@ -1,0 +1,181 @@
+﻿@model Animals.ViewModels.ClientsWithPetsVM
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Добавить</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Клиент</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Имя:</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Owner.Name)
+                @Html.ValidationMessageFor(model => model.Owner.Name)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Фамилия:</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Owner.Sername)
+                @Html.ValidationMessageFor(model => model.Owner.Sername)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Отчество:</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Owner.Patronymic)
+                @Html.ValidationMessageFor(model => model.Owner.Patronymic)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Адрес:</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Owner.Adress)
+                @Html.ValidationMessageFor(model => model.Owner.Adress)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Телефон:</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Owner.Phone)
+                @Html.ValidationMessageFor(model => model.Owner.Phone)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Email:</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Owner.Email)
+                @Html.ValidationMessageFor(model => model.Owner.Email)
+            </div>
+        </div>
+
+
+        <div class="form-horizontal">
+            <h4>Питомeц</h4>
+            <hr />
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Кличка:</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Pet.Nickname)
+                    @Html.ValidationMessageFor(model => model.Pet.Nickname)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Вид животного:</label>
+                <div class="col-md-10">
+                    @Html.DropDownList("PetTypes", new SelectList(Model.PetTypes))
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Порода:</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Pet.Species)
+                    @Html.ValidationMessageFor(model => model.Pet.Species)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Пол:</label>
+                <div class="col-md-10">
+
+                    @Html.RadioButtonFor(model => model.Pet.Gender, true, true) Мальчик
+
+                    @Html.RadioButtonFor(model => model.Pet.Gender, false, false) Девочка
+
+                    @Html.ValidationMessageFor(model => model.Pet.Gender)<br />
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Кастрирован?</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Pet.Castration)
+                    @Html.ValidationMessageFor(model => model.Pet.Castration)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Вакцинирован?</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Pet.Vaccination)
+                    @Html.ValidationMessageFor(model => model.Pet.Vaccination)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Дегельметизирован?</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Pet.Deworming)
+                    @Html.ValidationMessageFor(model => model.Pet.Deworming)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Лечили от паразитов?</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Pet.Treatment__parasites)
+                    @Html.ValidationMessageFor(model => model.Pet.Treatment__parasites)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Доктор:</label>
+                <div class="col-md-10">
+                    @Html.DropDownList("ListDoctors", new SelectList(Model.ListDoctors, "Id", "Name", "0"))
+
+                    @{
+                        if (!string.IsNullOrEmpty(Model.Message))
+                        {
+                           <text> @Model.Message </text>
+                        }
+                    }
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Дата рождения:</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Pet.BirthDate)
+                    @Html.ValidationMessageFor(model => model.Pet.BirthDate)
+                </div>
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Добавить" class="btn btn-default" />
+            </div>
+        </div>
+
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Назад", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

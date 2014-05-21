@@ -1,0 +1,28 @@
+﻿@model Animals.Models.Pet
+
+<table class="pet">
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => Model.Nickname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.PType)
+        </td>
+        <td>
+            @{
+                if (Model.BirthDate != null)
+                {
+                    Animals.Models.Age age = new Animals.Models.Age(Model.BirthDate.Value);
+
+                    <text> @age.Years лет, @age.Months мес. </text>
+                }
+            }
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.Doctor.Name)
+        </td>
+        <td>
+            @Html.ActionLink("Подробнее", "Details", "Pets", new { id = Model.Id }, null)
+        </td>
+    </tr>
+</table>

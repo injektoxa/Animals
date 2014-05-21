@@ -1,0 +1,337 @@
+﻿@model Animals.Models.Pet
+
+@{
+    ViewBag.Title = "Подробно";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Подробно</h2>
+
+@Html.ActionLink("Добавить анамнес", "Create", "Anamnes", new { petId = @Model.Id },null) <br/>
+@*@Html.ActionLink("Добавить биохимический анализ крови", "Create", "Anamnes", new { petId = @Model.Id }, null) <br />
+@Html.ActionLink("Добавить общий анализ крови", "Create", "Anamnes", new { petId = @Model.Id }, null)<br/>*@
+@Html.ActionLink("Добавить диагноз", "Create", "Diagnosis", new { petId = @Model.Id }, null)<br/>
+@Html.ActionLink("Хирургическое вмешательство", "Create", "Surgical", new { petId = @Model.Id }, null)<br/>
+@*@Html.ActionLink("Температурный лист", "Create", "Anamnes", new { petId = @Model.Id }, null)<br/>*@
+@Html.ActionLink("Лечение", "Create", "Treatments", new { petId = @Model.Id }, null)<br/>
+@*@Html.ActionLink("УЗИ", "Create", "Anamnes", new { petId = @Model.Id }, null)*@
+
+<div>
+    <h4>Питомец</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Кличка:
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Nickname)
+        </dd>
+        <dt>
+           Тип:
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PType)
+        </dd>
+        <dt>
+           Порода:
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Species)
+        </dd>
+        <dt>
+           Возвраст на приемe:
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Age)
+        </dd>
+        <dt>
+            Возвраст:
+        </dt>
+        <dd>
+            @{
+                if (Model.BirthDate != null)
+                {
+                     Animals.Models.Age age = new Animals.Models.Age(Model.BirthDate.Value);
+                
+                     <text> @age.Years лет, @age.Months мес. </text>
+                }
+            }
+        </dd>
+
+        <dt>
+           Пол:
+        </dt>
+        <dd>
+            @if (Model.Gender)
+            {
+                <text> Мальчик </text>
+            }
+            else
+            {
+                <text> Девочка </text>
+            }
+        </dd>
+        <dt>
+           Кастрация:
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Castration)
+        </dd>
+        <dt>
+            Вакцинация:
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Vaccination)
+        </dd>
+        <dt>
+            Дегельметизация:
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Deworming)
+        </dd>
+        <dt>
+            Лечение от паразитов:
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Treatment__parasites)
+        </dd>
+        <dt>
+            Дата приема:
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+        <dt>
+            Имя врача:
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Doctor.Name)
+        </dd>
+        <dt>
+            Имя хозяина:
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Owner.Name)
+        </dd>
+    </dl>
+
+    @if (Model.Anamnes.Count != 0)
+    {
+        <h1> Анамнез </h1>
+        <table class="table">
+            <tr>
+                <th>Дата</th>
+                <th>Текст</th>
+                <th></th>
+            </tr>
+            @foreach (var item in Model.Anamnes)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Text)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Удалить", "Delete", "Anamnes", new { petId = @Model.Id , id=item.Id }, null)
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+
+    @*@if (Model.Biochemical_analysis_of_blood.Count != 0)
+    {
+        <h1> Биохимический анализ крови </h1>
+        <table class="table">
+            <tr>
+                <th>Алат</th>
+                <th>Албумин</th>
+                <th>Амилаза</th>
+                <th>Асат</th>
+                <th>Са</th>
+                <th>Хлориды</th>
+            </tr>
+            @foreach (var item in Model.Biochemical_analysis_of_blood)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Alat)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Albumin)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Amilaza)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Asat)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Ca)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Clhoriodu)
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+
+    @if (Model.Common_analysis_of_blood.Count != 0)
+    {
+        <h1> Общий анализ крови </h1>
+        <table class="table">
+            <tr>
+                <th>Базофилы абсолютное</th>
+                <th>Базофилы проц</th>
+                <th>Эозинофилы</th>
+                <th>Эозинофилы проц</th>
+                <th>Са</th>
+                <th>Эритроциты</th>
+            </tr>
+            @foreach (var item in Model.Common_analysis_of_blood)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BazofiluAbsolut)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BazofiluPerc)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EozinofiluAbsolut)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EozinofiluPerc)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Eritroc)
+                    </td>
+                </tr>
+            }
+        </table>
+    }*@
+
+
+    @if (Model.Diagnostics.Count != 0)
+    {
+        <h1> Диагноз </h1>
+        <table class="table">
+            <tr>
+                <th>Дата</th>
+                <th>Текст</th>
+                <th> </th>
+            </tr>
+
+            @foreach (var item in Model.Diagnostics)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Text)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Удалить", "Delete", "Diagnosis", new { petId = @Model.Id, id = item.Id }, null)
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+
+
+    @if (Model.Surgical_treatments.Count != 0)
+    {
+        <h1> Хирургическое вмешательство </h1>
+        <table class="table">
+            <tr>
+                <th>Дата</th>
+                <th>Текст</th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model.Surgical_treatments)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Text)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Удалить", "Delete", "Surgical", new { petId = @Model.Id, id = item.Id }, null)
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+
+    @*@if (Model.TemperatureLists.Count != 0)
+    {
+        <h1> Температурный лист </h1>
+        <table class="table">
+            <tr>
+                <th>Дата</th>
+                <th>Пульс</th>
+                <th>Температура</th>
+                <th>Дыхание</th>
+            </tr>
+
+            @foreach (var item in Model.TemperatureLists)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Pulse)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Temperature)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Breath)
+                    </td>
+                </tr>
+            }
+        </table>
+    }*@
+    
+    @if (Model.Treatments.Count != 0)
+    {
+        <h1> Лечение </h1>
+        <table class="table">
+            <tr>
+                <th>Дата</th>
+                <th>Текст</th>
+                <th></th>
+            </tr>
+            @foreach (var item in Model.Treatments)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Text)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Удалить", "Delete", "Treatments", new { petId = @Model.Id, id = item.Id }, null)
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+
+</div>
+<p>
+    @Html.ActionLink("Изменить", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Назад", "Index", "Owners",null,null)
+</p>

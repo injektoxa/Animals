@@ -1,0 +1,169 @@
+﻿@model IEnumerable<Animals.Models.Owner>
+
+@{
+    ViewBag.Title = "Пациенты";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style type="text/css">
+        table.ownertable {
+            font-family: verdana,arial,sans-serif;
+            font-size: 11px;
+            color: #333333;
+            border-width: 1px;
+            border-color: #999999;
+            border-collapse: collapse;
+        }
+
+        table.ownertable th {
+            background: #b5cfd2 url('Content/cell-blue.jpg');
+            border-width: 1px;
+            padding: 8px;
+            border-style: solid;
+            border-color: #999999;
+        }
+
+            table.ownertable td {
+                background: #dcddc0 url('Content/cell-grey.jpg');
+                border-width: 1px;
+                padding: 8px;
+                border-style: solid;
+                border-color: #999999;
+                background-repeat: no-repeat;
+            }
+
+        table.pet, table.pet th, table.pet td {
+            border: none;
+            background: none;
+        }
+
+        table.pet td {
+            width: 100px;
+        }
+</style>
+
+<h2>Клиенты</h2>
+
+<p>
+    @Html.ActionLink("Добавить клиента", "Create")
+
+    @using (Html.BeginForm())
+    {
+    <table>
+
+        <tr>
+            <td>
+                Фамилия:
+            </td>
+            <td>
+                @Html.TextBox("searchSername")
+            </td>
+            <td>
+                Адрес:
+            </td>
+            <td>
+                @Html.TextBox("searchAddress")
+            </td>
+            <td>
+                Телефон:
+            </td>
+            <td>
+                @Html.TextBox("searchPhone")
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                Кличка:
+            </td>
+            <td>
+                @Html.TextBox("searchPet")
+            </td>
+            <td>
+                Порода:
+            </td>
+            <td>
+                @Html.TextBox("searchBreed")
+            </td>
+            <td>
+                Номер:
+            </td>
+            <td>
+                @Html.TextBox("searchNumber")
+            </td>
+        </tr>
+        <tr>
+            <input type="submit" value="Поиск" />
+        </tr>
+    </table>
+    }
+</p>
+<table class="ownertable">
+    <tr>
+        <th>
+            №
+        </th>
+        <th>
+            Имя
+        </th>
+        <th>
+            Фамилия
+        </th>
+        <th>
+            Телефон
+        </th>
+        <th>
+            Адрес
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+
+        </th>
+        <th>
+
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Number)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sername)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Adress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @{
+        foreach (var pet in item.Pets)
+        {
+            @Html.Partial("~/Views/Pets/_Index.cshtml", pet);
+        }
+                }
+            </td>
+            <td>
+                @Html.ActionLink("Изменить", "Edit", new { id = item.Id }) <br/>
+                @*@Html.ActionLink("Удалить", "Delete", new { id = item.Id }) <br/>*@
+                @Html.ActionLink("Добавить", "Create", "Pets" , new { id = item.Id },null)
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+

@@ -1,0 +1,1378 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="AnimalsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Analysis of urine">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PetId" Type="uniqueidentifier" />
+          <Property Name="Path" Type="nvarchar" MaxLength="20" />
+          <Property Name="Date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Anamnes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Text" Type="nvarchar" MaxLength="1000" />
+          <Property Name="PetId" Type="uniqueidentifier" />
+          <Property Name="Date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Bacteriological research">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PetId" Type="uniqueidentifier" />
+          <Property Name="Path" Type="nvarchar" MaxLength="20" />
+          <Property Name="Date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Biochemical analysis of blood">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PetId" Type="uniqueidentifier" />
+          <Property Name="Path" Type="nvarchar" MaxLength="20" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="Mochevina" Type="decimal" Precision="18" Scale="1" />
+          <Property Name="Kreatinin" Type="decimal" Precision="18" Scale="1" />
+          <Property Name="Holesterin" Type="decimal" Precision="18" Scale="1" />
+          <Property Name="Glyukoza" Type="decimal" Precision="18" Scale="1" />
+          <Property Name="ShelochnayaFosftaza" Type="decimal" Precision="18" Scale="1" />
+          <Property Name="Alat" Type="decimal" Precision="18" Scale="1" />
+          <Property Name="Asat" Type="decimal" Precision="18" Scale="1" />
+          <Property Name="CommonProtein" Type="decimal" Precision="18" Scale="1" />
+          <Property Name="Albumin" Type="decimal" Precision="18" Scale="1" />
+          <Property Name="Globulin" Type="decimal" Precision="18" Scale="1" />
+          <Property Name="Na" Type="decimal" Precision="18" Scale="1" />
+          <Property Name="K" Type="decimal" Precision="18" Scale="1" />
+          <Property Name="Ca" Type="decimal" Precision="18" Scale="1" />
+          <Property Name="P" Type="decimal" Precision="18" Scale="1" />
+          <Property Name="Clhoriodu" Type="decimal" Precision="18" Scale="1" />
+          <Property Name="CommonBilubrin" Type="decimal" Precision="18" Scale="1" />
+          <Property Name="Solidbilirubin" Type="decimal" Precision="18" Scale="1" />
+          <Property Name="lDG" Type="decimal" Precision="18" Scale="1" />
+          <Property Name="KreatinKinaza" Type="decimal" Precision="18" Scale="1" />
+          <Property Name="GGT" Type="decimal" Precision="18" Scale="1" />
+          <Property Name="Amilaza" Type="decimal" Precision="18" Scale="1" />
+          <Property Name="Lipaza" Type="decimal" Precision="18" Scale="1" />
+        </EntityType>
+        <EntityType Name="Common analysis of blood">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PetId" Type="uniqueidentifier" />
+          <Property Name="Leikocit" Type="decimal" Precision="18" Scale="1" />
+          <Property Name="Eritroc" Type="decimal" Precision="18" Scale="1" />
+          <Property Name="Hemoglob" Type="decimal" Precision="18" Scale="1" />
+          <Property Name="Gematocrit" Type="decimal" Precision="18" Scale="1" />
+          <Property Name="KolVoTrombocitov" Type="decimal" Precision="18" Scale="1" />
+          <Property Name="KolVoTrombocitovManual" Type="decimal" Precision="18" Scale="1" />
+          <Property Name="NeitrofiluSegmentPerc" Type="decimal" Precision="18" Scale="1" />
+          <Property Name="NeitrofiluSegmentAbsolut" Type="decimal" Precision="18" Scale="1" />
+          <Property Name="NeitrofiluPalochkoyadPer" Type="decimal" Precision="18" Scale="1" />
+          <Property Name="NeitrofiluPalochkoyadAbsolut" Type="decimal" Precision="18" Scale="1" />
+          <Property Name="LimfocituPerc" Type="decimal" Precision="18" Scale="1" />
+          <Property Name="LimfocituAbsolut" Type="decimal" Precision="18" Scale="1" />
+          <Property Name="MonocituPerc" Type="decimal" Precision="18" Scale="1" />
+          <Property Name="MonocituAbsolut" Type="decimal" Precision="18" Scale="1" />
+          <Property Name="EozinofiluPerc" Type="decimal" Precision="18" Scale="1" />
+          <Property Name="EozinofiluAbsolut" Type="decimal" Precision="18" Scale="1" />
+          <Property Name="BazofiluPerc" Type="decimal" Precision="18" Scale="1" />
+          <Property Name="BazofiluAbsolut" Type="decimal" Precision="18" Scale="1" />
+          <Property Name="RetikulocituPerc" Type="decimal" Precision="18" Scale="1" />
+          <Property Name="RetikulocituKorrectPerc" Type="decimal" Precision="18" Scale="1" />
+          <Property Name="RetikulocituAbsolut" Type="decimal" Precision="18" Scale="1" />
+          <Property Name="Date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Coprogram  tests">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PetId" Type="uniqueidentifier" />
+          <Property Name="Path" Type="nvarchar" MaxLength="20" />
+          <Property Name="Date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Diagnostics">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PetId" Type="uniqueidentifier" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="Text" Type="nvarchar" MaxLength="1000" />
+        </EntityType>
+        <EntityType Name="Doctors">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Sername" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Patronymic" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Materials">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="text" />
+          <Property Name="Price" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Microscopy">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Path" Type="nvarchar" MaxLength="50" />
+          <Property Name="PetId" Type="uniqueidentifier" />
+          <Property Name="Date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Owners">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Sername" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Patronymic" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Adress" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Number" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email2" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Pets">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Nickname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PType" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Species" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Age" Type="nvarchar" MaxLength="20" />
+          <Property Name="Gender" Type="bit" Nullable="false" />
+          <Property Name="Castration" Type="bit" Nullable="false" />
+          <Property Name="Vaccination" Type="bit" Nullable="false" />
+          <Property Name="Deworming" Type="bit" Nullable="false" />
+          <Property Name="Treatment  parasites" Type="bit" Nullable="false" />
+          <Property Name="OwnerId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DoctorId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="BirthDate" Type="date" />
+        </EntityType>
+        <EntityType Name="Photos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PetId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Image" Type="image" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Services">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="text" />
+          <Property Name="Price" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Surgical treatments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PetId" Type="uniqueidentifier" />
+          <Property Name="Text" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TemperatureList">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Temperature" Type="float" />
+          <Property Name="Pulse" Type="float" />
+          <Property Name="Breath" Type="float" />
+          <Property Name="PetId" Type="uniqueidentifier" />
+          <Property Name="Date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Treatments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PetId" Type="uniqueidentifier" />
+          <Property Name="Text" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="UZI">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PetId" Type="uniqueidentifier" />
+          <Property Name="Text" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="XRays">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PetId" Type="uniqueidentifier" />
+          <Property Name="Path" Type="nvarchar" MaxLength="20" />
+          <Property Name="Date" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_Anamnes_Pets">
+          <End Role="Pets" Type="Self.Pets" Multiplicity="0..1" />
+          <End Role="Anamnes" Type="Self.Anamnes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pets">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Anamnes">
+              <PropertyRef Name="PetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bacteriological research_Pets">
+          <End Role="Pets" Type="Self.Pets" Multiplicity="0..1" />
+          <End Role="Bacteriological research" Type="Self.Bacteriological research" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pets">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Bacteriological research">
+              <PropertyRef Name="PetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Biochemical analysis of blood_Pets">
+          <End Role="Pets" Type="Self.Pets" Multiplicity="0..1" />
+          <End Role="Biochemical analysis of blood" Type="Self.Biochemical analysis of blood" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pets">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Biochemical analysis of blood">
+              <PropertyRef Name="PetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Biochemical analysis of urine_Pets">
+          <End Role="Pets" Type="Self.Pets" Multiplicity="0..1" />
+          <End Role="Analysis of urine" Type="Self.Analysis of urine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pets">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Analysis of urine">
+              <PropertyRef Name="PetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Common analysis of blood_Pets">
+          <End Role="Pets" Type="Self.Pets" Multiplicity="0..1" />
+          <End Role="Common analysis of blood" Type="Self.Common analysis of blood" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pets">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Common analysis of blood">
+              <PropertyRef Name="PetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Coprogram  tests_Pets">
+          <End Role="Pets" Type="Self.Pets" Multiplicity="0..1" />
+          <End Role="Coprogram  tests" Type="Self.Coprogram  tests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pets">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Coprogram  tests">
+              <PropertyRef Name="PetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Diagnostics_Pets1">
+          <End Role="Pets" Type="Self.Pets" Multiplicity="0..1" />
+          <End Role="Diagnostics" Type="Self.Diagnostics" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pets">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Diagnostics">
+              <PropertyRef Name="PetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Microscopy_Pets">
+          <End Role="Pets" Type="Self.Pets" Multiplicity="0..1" />
+          <End Role="Microscopy" Type="Self.Microscopy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pets">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Microscopy">
+              <PropertyRef Name="PetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pets_Doctors">
+          <End Role="Doctors" Type="Self.Doctors" Multiplicity="1" />
+          <End Role="Pets" Type="Self.Pets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Pets">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pets_Owners">
+          <End Role="Owners" Type="Self.Owners" Multiplicity="1" />
+          <End Role="Pets" Type="Self.Pets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Owners">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Pets">
+              <PropertyRef Name="OwnerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Photos_Pets">
+          <End Role="Pets" Type="Self.Pets" Multiplicity="1" />
+          <End Role="Photos" Type="Self.Photos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pets">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Photos">
+              <PropertyRef Name="PetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Surgical treatments_Pets1">
+          <End Role="Pets" Type="Self.Pets" Multiplicity="0..1" />
+          <End Role="Surgical treatments" Type="Self.Surgical treatments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pets">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Surgical treatments">
+              <PropertyRef Name="PetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TemperatureList_Pets">
+          <End Role="Pets" Type="Self.Pets" Multiplicity="0..1" />
+          <End Role="TemperatureList" Type="Self.TemperatureList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pets">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TemperatureList">
+              <PropertyRef Name="PetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Treatments_Pets">
+          <End Role="Pets" Type="Self.Pets" Multiplicity="0..1" />
+          <End Role="Treatments" Type="Self.Treatments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pets">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Treatments">
+              <PropertyRef Name="PetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UZI_Pets">
+          <End Role="Pets" Type="Self.Pets" Multiplicity="0..1" />
+          <End Role="UZI" Type="Self.UZI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pets">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UZI">
+              <PropertyRef Name="PetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_XRays_Pets">
+          <End Role="Pets" Type="Self.Pets" Multiplicity="0..1" />
+          <End Role="XRays" Type="Self.XRays" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pets">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="XRays">
+              <PropertyRef Name="PetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AnimalsModelStoreContainer">
+          <EntitySet Name="Analysis of urine" EntityType="Self.Analysis of urine" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Anamnes" EntityType="Self.Anamnes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Bacteriological research" EntityType="Self.Bacteriological research" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Biochemical analysis of blood" EntityType="Self.Biochemical analysis of blood" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Common analysis of blood" EntityType="Self.Common analysis of blood" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Coprogram  tests" EntityType="Self.Coprogram  tests" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Diagnostics" EntityType="Self.Diagnostics" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Doctors" EntityType="Self.Doctors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Materials" EntityType="Self.Materials" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Microscopy" EntityType="Self.Microscopy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Owners" EntityType="Self.Owners" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pets" EntityType="Self.Pets" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Photos" EntityType="Self.Photos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Services" EntityType="Self.Services" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Surgical treatments" EntityType="Self.Surgical treatments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TemperatureList" EntityType="Self.TemperatureList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Treatments" EntityType="Self.Treatments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UZI" EntityType="Self.UZI" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="XRays" EntityType="Self.XRays" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Anamnes_Pets" Association="Self.FK_Anamnes_Pets">
+            <End Role="Pets" EntitySet="Pets" />
+            <End Role="Anamnes" EntitySet="Anamnes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bacteriological research_Pets" Association="Self.FK_Bacteriological research_Pets">
+            <End Role="Pets" EntitySet="Pets" />
+            <End Role="Bacteriological research" EntitySet="Bacteriological research" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Biochemical analysis of blood_Pets" Association="Self.FK_Biochemical analysis of blood_Pets">
+            <End Role="Pets" EntitySet="Pets" />
+            <End Role="Biochemical analysis of blood" EntitySet="Biochemical analysis of blood" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Biochemical analysis of urine_Pets" Association="Self.FK_Biochemical analysis of urine_Pets">
+            <End Role="Pets" EntitySet="Pets" />
+            <End Role="Analysis of urine" EntitySet="Analysis of urine" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Common analysis of blood_Pets" Association="Self.FK_Common analysis of blood_Pets">
+            <End Role="Pets" EntitySet="Pets" />
+            <End Role="Common analysis of blood" EntitySet="Common analysis of blood" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Coprogram  tests_Pets" Association="Self.FK_Coprogram  tests_Pets">
+            <End Role="Pets" EntitySet="Pets" />
+            <End Role="Coprogram  tests" EntitySet="Coprogram  tests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Diagnostics_Pets1" Association="Self.FK_Diagnostics_Pets1">
+            <End Role="Pets" EntitySet="Pets" />
+            <End Role="Diagnostics" EntitySet="Diagnostics" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Microscopy_Pets" Association="Self.FK_Microscopy_Pets">
+            <End Role="Pets" EntitySet="Pets" />
+            <End Role="Microscopy" EntitySet="Microscopy" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pets_Doctors" Association="Self.FK_Pets_Doctors">
+            <End Role="Doctors" EntitySet="Doctors" />
+            <End Role="Pets" EntitySet="Pets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pets_Owners" Association="Self.FK_Pets_Owners">
+            <End Role="Owners" EntitySet="Owners" />
+            <End Role="Pets" EntitySet="Pets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Photos_Pets" Association="Self.FK_Photos_Pets">
+            <End Role="Pets" EntitySet="Pets" />
+            <End Role="Photos" EntitySet="Photos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Surgical treatments_Pets1" Association="Self.FK_Surgical treatments_Pets1">
+            <End Role="Pets" EntitySet="Pets" />
+            <End Role="Surgical treatments" EntitySet="Surgical treatments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TemperatureList_Pets" Association="Self.FK_TemperatureList_Pets">
+            <End Role="Pets" EntitySet="Pets" />
+            <End Role="TemperatureList" EntitySet="TemperatureList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Treatments_Pets" Association="Self.FK_Treatments_Pets">
+            <End Role="Pets" EntitySet="Pets" />
+            <End Role="Treatments" EntitySet="Treatments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UZI_Pets" Association="Self.FK_UZI_Pets">
+            <End Role="Pets" EntitySet="Pets" />
+            <End Role="UZI" EntitySet="UZI" />
+          </AssociationSet>
+          <AssociationSet Name="FK_XRays_Pets" Association="Self.FK_XRays_Pets">
+            <End Role="Pets" EntitySet="Pets" />
+            <End Role="XRays" EntitySet="XRays" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AnimalsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Analysis_of_urine">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="PetId" Type="Guid" />
+          <Property Name="Path" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Pet" Relationship="Self.FK_Biochemical_analysis_of_urine_Pets" FromRole="Analysis_of_urine" ToRole="Pets" />
+        </EntityType>
+        <EntityType Name="Anamne">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Text" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="PetId" Type="Guid" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Pet" Relationship="Self.FK_Anamnes_Pets" FromRole="Anamnes" ToRole="Pets" />
+        </EntityType>
+        <EntityType Name="Bacteriological_research">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="PetId" Type="Guid" />
+          <Property Name="Path" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Pet" Relationship="Self.FK_Bacteriological_research_Pets" FromRole="Bacteriological_research" ToRole="Pets" />
+        </EntityType>
+        <EntityType Name="Biochemical_analysis_of_blood">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="PetId" Type="Guid" />
+          <Property Name="Path" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="Mochevina" Type="Decimal" Precision="18" Scale="1" />
+          <Property Name="Kreatinin" Type="Decimal" Precision="18" Scale="1" />
+          <Property Name="Holesterin" Type="Decimal" Precision="18" Scale="1" />
+          <Property Name="Glyukoza" Type="Decimal" Precision="18" Scale="1" />
+          <Property Name="ShelochnayaFosftaza" Type="Decimal" Precision="18" Scale="1" />
+          <Property Name="Alat" Type="Decimal" Precision="18" Scale="1" />
+          <Property Name="Asat" Type="Decimal" Precision="18" Scale="1" />
+          <Property Name="CommonProtein" Type="Decimal" Precision="18" Scale="1" />
+          <Property Name="Albumin" Type="Decimal" Precision="18" Scale="1" />
+          <Property Name="Globulin" Type="Decimal" Precision="18" Scale="1" />
+          <Property Name="Na" Type="Decimal" Precision="18" Scale="1" />
+          <Property Name="K" Type="Decimal" Precision="18" Scale="1" />
+          <Property Name="Ca" Type="Decimal" Precision="18" Scale="1" />
+          <Property Name="P" Type="Decimal" Precision="18" Scale="1" />
+          <Property Name="Clhoriodu" Type="Decimal" Precision="18" Scale="1" />
+          <Property Name="CommonBilubrin" Type="Decimal" Precision="18" Scale="1" />
+          <Property Name="Solidbilirubin" Type="Decimal" Precision="18" Scale="1" />
+          <Property Name="lDG" Type="Decimal" Precision="18" Scale="1" />
+          <Property Name="KreatinKinaza" Type="Decimal" Precision="18" Scale="1" />
+          <Property Name="GGT" Type="Decimal" Precision="18" Scale="1" />
+          <Property Name="Amilaza" Type="Decimal" Precision="18" Scale="1" />
+          <Property Name="Lipaza" Type="Decimal" Precision="18" Scale="1" />
+          <NavigationProperty Name="Pet" Relationship="Self.FK_Biochemical_analysis_of_blood_Pets" FromRole="Biochemical_analysis_of_blood" ToRole="Pets" />
+        </EntityType>
+        <EntityType Name="Common_analysis_of_blood">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="PetId" Type="Guid" />
+          <Property Name="Leikocit" Type="Decimal" Precision="18" Scale="1" />
+          <Property Name="Eritroc" Type="Decimal" Precision="18" Scale="1" />
+          <Property Name="Hemoglob" Type="Decimal" Precision="18" Scale="1" />
+          <Property Name="Gematocrit" Type="Decimal" Precision="18" Scale="1" />
+          <Property Name="KolVoTrombocitov" Type="Decimal" Precision="18" Scale="1" />
+          <Property Name="KolVoTrombocitovManual" Type="Decimal" Precision="18" Scale="1" />
+          <Property Name="NeitrofiluSegmentPerc" Type="Decimal" Precision="18" Scale="1" />
+          <Property Name="NeitrofiluSegmentAbsolut" Type="Decimal" Precision="18" Scale="1" />
+          <Property Name="NeitrofiluPalochkoyadPer" Type="Decimal" Precision="18" Scale="1" />
+          <Property Name="NeitrofiluPalochkoyadAbsolut" Type="Decimal" Precision="18" Scale="1" />
+          <Property Name="LimfocituPerc" Type="Decimal" Precision="18" Scale="1" />
+          <Property Name="LimfocituAbsolut" Type="Decimal" Precision="18" Scale="1" />
+          <Property Name="MonocituPerc" Type="Decimal" Precision="18" Scale="1" />
+          <Property Name="MonocituAbsolut" Type="Decimal" Precision="18" Scale="1" />
+          <Property Name="EozinofiluPerc" Type="Decimal" Precision="18" Scale="1" />
+          <Property Name="EozinofiluAbsolut" Type="Decimal" Precision="18" Scale="1" />
+          <Property Name="BazofiluPerc" Type="Decimal" Precision="18" Scale="1" />
+          <Property Name="BazofiluAbsolut" Type="Decimal" Precision="18" Scale="1" />
+          <Property Name="RetikulocituPerc" Type="Decimal" Precision="18" Scale="1" />
+          <Property Name="RetikulocituKorrectPerc" Type="Decimal" Precision="18" Scale="1" />
+          <Property Name="RetikulocituAbsolut" Type="Decimal" Precision="18" Scale="1" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Pet" Relationship="Self.FK_Common_analysis_of_blood_Pets" FromRole="Common_analysis_of_blood" ToRole="Pets" />
+        </EntityType>
+        <EntityType Name="Coprogram__test">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="PetId" Type="Guid" />
+          <Property Name="Path" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Pet" Relationship="Self.FK_Coprogram__tests_Pets" FromRole="Coprogram__tests" ToRole="Pets" />
+        </EntityType>
+        <EntityType Name="Diagnostic">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="PetId" Type="Guid" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="Text" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Pet" Relationship="Self.FK_Diagnostics_Pets1" FromRole="Diagnostics" ToRole="Pets" />
+        </EntityType>
+        <EntityType Name="Doctor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Sername" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Patronymic" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Pets" Relationship="Self.FK_Pets_Doctors" FromRole="Doctors" ToRole="Pets" />
+        </EntityType>
+        <EntityType Name="Material">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Price" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Microscopy">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Path" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PetId" Type="Guid" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Pet" Relationship="Self.FK_Microscopy_Pets" FromRole="Microscopy" ToRole="Pets" />
+        </EntityType>
+        <EntityType Name="Owner">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Sername" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Adress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Number" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Pets" Relationship="Self.FK_Pets_Owners" FromRole="Owners" ToRole="Pets" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Pet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Nickname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PType" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Species" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Age" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Gender" Type="Boolean" Nullable="false" />
+          <Property Name="Castration" Type="Boolean" Nullable="false" />
+          <Property Name="Vaccination" Type="Boolean" Nullable="false" />
+          <Property Name="Deworming" Type="Boolean" Nullable="false" />
+          <Property Name="Treatment__parasites" Type="Boolean" Nullable="false" />
+          <Property Name="OwnerId" Type="Guid" Nullable="false" />
+          <Property Name="DoctorId" Type="Guid" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Analysis_of_urine" Relationship="Self.FK_Biochemical_analysis_of_urine_Pets" FromRole="Pets" ToRole="Analysis_of_urine" />
+          <NavigationProperty Name="Anamnes" Relationship="Self.FK_Anamnes_Pets" FromRole="Pets" ToRole="Anamnes" />
+          <NavigationProperty Name="Bacteriological_research" Relationship="Self.FK_Bacteriological_research_Pets" FromRole="Pets" ToRole="Bacteriological_research" />
+          <NavigationProperty Name="Biochemical_analysis_of_blood" Relationship="Self.FK_Biochemical_analysis_of_blood_Pets" FromRole="Pets" ToRole="Biochemical_analysis_of_blood" />
+          <NavigationProperty Name="Common_analysis_of_blood" Relationship="Self.FK_Common_analysis_of_blood_Pets" FromRole="Pets" ToRole="Common_analysis_of_blood" />
+          <NavigationProperty Name="Coprogram__tests" Relationship="Self.FK_Coprogram__tests_Pets" FromRole="Pets" ToRole="Coprogram__tests" />
+          <NavigationProperty Name="Diagnostics" Relationship="Self.FK_Diagnostics_Pets1" FromRole="Pets" ToRole="Diagnostics" />
+          <NavigationProperty Name="Doctor" Relationship="Self.FK_Pets_Doctors" FromRole="Pets" ToRole="Doctors" />
+          <NavigationProperty Name="Microscopies" Relationship="Self.FK_Microscopy_Pets" FromRole="Pets" ToRole="Microscopy" />
+          <NavigationProperty Name="Owner" Relationship="Self.FK_Pets_Owners" FromRole="Pets" ToRole="Owners" />
+          <NavigationProperty Name="Photos" Relationship="Self.FK_Photos_Pets" FromRole="Pets" ToRole="Photos" />
+          <NavigationProperty Name="Surgical_treatments" Relationship="Self.FK_Surgical_treatments_Pets1" FromRole="Pets" ToRole="Surgical_treatments" />
+          <NavigationProperty Name="TemperatureLists" Relationship="Self.FK_TemperatureList_Pets" FromRole="Pets" ToRole="TemperatureList" />
+          <NavigationProperty Name="Treatments" Relationship="Self.FK_Treatments_Pets" FromRole="Pets" ToRole="Treatments" />
+          <NavigationProperty Name="UZIs" Relationship="Self.FK_UZI_Pets" FromRole="Pets" ToRole="UZI" />
+          <NavigationProperty Name="XRays" Relationship="Self.FK_XRays_Pets" FromRole="Pets" ToRole="XRays" />
+          <Property Name="BirthDate" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="Photo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="PetId" Type="Guid" Nullable="false" />
+          <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Pet" Relationship="Self.FK_Photos_Pets" FromRole="Photos" ToRole="Pets" />
+        </EntityType>
+        <EntityType Name="Service">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Price" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Surgical_treatment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="PetId" Type="Guid" />
+          <Property Name="Text" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Pet" Relationship="Self.FK_Surgical_treatments_Pets1" FromRole="Surgical_treatments" ToRole="Pets" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TemperatureList">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Temperature" Type="Double" />
+          <Property Name="Pulse" Type="Double" />
+          <Property Name="Breath" Type="Double" />
+          <Property Name="PetId" Type="Guid" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Pet" Relationship="Self.FK_TemperatureList_Pets" FromRole="TemperatureList" ToRole="Pets" />
+        </EntityType>
+        <EntityType Name="Treatment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="PetId" Type="Guid" />
+          <Property Name="Text" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Pet" Relationship="Self.FK_Treatments_Pets" FromRole="Treatments" ToRole="Pets" />
+        </EntityType>
+        <EntityType Name="UZI">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="PetId" Type="Guid" />
+          <Property Name="Text" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Pet" Relationship="Self.FK_UZI_Pets" FromRole="UZI" ToRole="Pets" />
+        </EntityType>
+        <EntityType Name="XRay">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="PetId" Type="Guid" />
+          <Property Name="Path" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Pet" Relationship="Self.FK_XRays_Pets" FromRole="XRays" ToRole="Pets" />
+        </EntityType>
+        <Association Name="FK_Biochemical_analysis_of_urine_Pets">
+          <End Role="Pets" Type="Self.Pet" Multiplicity="0..1" />
+          <End Role="Analysis_of_urine" Type="Self.Analysis_of_urine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pets">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Analysis_of_urine">
+              <PropertyRef Name="PetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Anamnes_Pets">
+          <End Role="Pets" Type="Self.Pet" Multiplicity="0..1" />
+          <End Role="Anamnes" Type="Self.Anamne" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pets">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Anamnes">
+              <PropertyRef Name="PetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bacteriological_research_Pets">
+          <End Role="Pets" Type="Self.Pet" Multiplicity="0..1" />
+          <End Role="Bacteriological_research" Type="Self.Bacteriological_research" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pets">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Bacteriological_research">
+              <PropertyRef Name="PetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Biochemical_analysis_of_blood_Pets">
+          <End Role="Pets" Type="Self.Pet" Multiplicity="0..1" />
+          <End Role="Biochemical_analysis_of_blood" Type="Self.Biochemical_analysis_of_blood" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pets">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Biochemical_analysis_of_blood">
+              <PropertyRef Name="PetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Common_analysis_of_blood_Pets">
+          <End Role="Pets" Type="Self.Pet" Multiplicity="0..1" />
+          <End Role="Common_analysis_of_blood" Type="Self.Common_analysis_of_blood" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pets">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Common_analysis_of_blood">
+              <PropertyRef Name="PetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Coprogram__tests_Pets">
+          <End Role="Pets" Type="Self.Pet" Multiplicity="0..1" />
+          <End Role="Coprogram__tests" Type="Self.Coprogram__test" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pets">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Coprogram__tests">
+              <PropertyRef Name="PetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Diagnostics_Pets1">
+          <End Role="Pets" Type="Self.Pet" Multiplicity="0..1" />
+          <End Role="Diagnostics" Type="Self.Diagnostic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pets">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Diagnostics">
+              <PropertyRef Name="PetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pets_Doctors">
+          <End Role="Doctors" Type="Self.Doctor" Multiplicity="1" />
+          <End Role="Pets" Type="Self.Pet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Pets">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Microscopy_Pets">
+          <End Role="Pets" Type="Self.Pet" Multiplicity="0..1" />
+          <End Role="Microscopy" Type="Self.Microscopy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pets">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Microscopy">
+              <PropertyRef Name="PetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pets_Owners">
+          <End Role="Owners" Type="Self.Owner" Multiplicity="1" />
+          <End Role="Pets" Type="Self.Pet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Owners">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Pets">
+              <PropertyRef Name="OwnerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Photos_Pets">
+          <End Role="Pets" Type="Self.Pet" Multiplicity="1" />
+          <End Role="Photos" Type="Self.Photo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pets">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Photos">
+              <PropertyRef Name="PetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Surgical_treatments_Pets1">
+          <End Role="Pets" Type="Self.Pet" Multiplicity="0..1" />
+          <End Role="Surgical_treatments" Type="Self.Surgical_treatment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pets">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Surgical_treatments">
+              <PropertyRef Name="PetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TemperatureList_Pets">
+          <End Role="Pets" Type="Self.Pet" Multiplicity="0..1" />
+          <End Role="TemperatureList" Type="Self.TemperatureList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pets">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TemperatureList">
+              <PropertyRef Name="PetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Treatments_Pets">
+          <End Role="Pets" Type="Self.Pet" Multiplicity="0..1" />
+          <End Role="Treatments" Type="Self.Treatment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pets">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Treatments">
+              <PropertyRef Name="PetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UZI_Pets">
+          <End Role="Pets" Type="Self.Pet" Multiplicity="0..1" />
+          <End Role="UZI" Type="Self.UZI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pets">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UZI">
+              <PropertyRef Name="PetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_XRays_Pets">
+          <End Role="Pets" Type="Self.Pet" Multiplicity="0..1" />
+          <End Role="XRays" Type="Self.XRay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pets">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="XRays">
+              <PropertyRef Name="PetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AnimalsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Analysis_of_urines" EntityType="Self.Analysis_of_urine" />
+          <EntitySet Name="Anamnes" EntityType="Self.Anamne" />
+          <EntitySet Name="Bacteriological_researches" EntityType="Self.Bacteriological_research" />
+          <EntitySet Name="Biochemical_analysis_of_bloods" EntityType="Self.Biochemical_analysis_of_blood" />
+          <EntitySet Name="Common_analysis_of_bloods" EntityType="Self.Common_analysis_of_blood" />
+          <EntitySet Name="Coprogram__tests" EntityType="Self.Coprogram__test" />
+          <EntitySet Name="Diagnostics" EntityType="Self.Diagnostic" />
+          <EntitySet Name="Doctors" EntityType="Self.Doctor" />
+          <EntitySet Name="Materials" EntityType="Self.Material" />
+          <EntitySet Name="Microscopies" EntityType="Self.Microscopy" />
+          <EntitySet Name="Owners" EntityType="Self.Owner" />
+          <EntitySet Name="Pets" EntityType="Self.Pet" />
+          <EntitySet Name="Photos" EntityType="Self.Photo" />
+          <EntitySet Name="Services" EntityType="Self.Service" />
+          <EntitySet Name="Surgical_treatments" EntityType="Self.Surgical_treatment" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="TemperatureLists" EntityType="Self.TemperatureList" />
+          <EntitySet Name="Treatments" EntityType="Self.Treatment" />
+          <EntitySet Name="UZIs" EntityType="Self.UZI" />
+          <EntitySet Name="XRays" EntityType="Self.XRay" />
+          <AssociationSet Name="FK_Biochemical_analysis_of_urine_Pets" Association="Self.FK_Biochemical_analysis_of_urine_Pets">
+            <End Role="Pets" EntitySet="Pets" />
+            <End Role="Analysis_of_urine" EntitySet="Analysis_of_urines" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Anamnes_Pets" Association="Self.FK_Anamnes_Pets">
+            <End Role="Pets" EntitySet="Pets" />
+            <End Role="Anamnes" EntitySet="Anamnes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bacteriological_research_Pets" Association="Self.FK_Bacteriological_research_Pets">
+            <End Role="Pets" EntitySet="Pets" />
+            <End Role="Bacteriological_research" EntitySet="Bacteriological_researches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Biochemical_analysis_of_blood_Pets" Association="Self.FK_Biochemical_analysis_of_blood_Pets">
+            <End Role="Pets" EntitySet="Pets" />
+            <End Role="Biochemical_analysis_of_blood" EntitySet="Biochemical_analysis_of_bloods" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Common_analysis_of_blood_Pets" Association="Self.FK_Common_analysis_of_blood_Pets">
+            <End Role="Pets" EntitySet="Pets" />
+            <End Role="Common_analysis_of_blood" EntitySet="Common_analysis_of_bloods" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Coprogram__tests_Pets" Association="Self.FK_Coprogram__tests_Pets">
+            <End Role="Pets" EntitySet="Pets" />
+            <End Role="Coprogram__tests" EntitySet="Coprogram__tests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Diagnostics_Pets1" Association="Self.FK_Diagnostics_Pets1">
+            <End Role="Pets" EntitySet="Pets" />
+            <End Role="Diagnostics" EntitySet="Diagnostics" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pets_Doctors" Association="Self.FK_Pets_Doctors">
+            <End Role="Doctors" EntitySet="Doctors" />
+            <End Role="Pets" EntitySet="Pets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Microscopy_Pets" Association="Self.FK_Microscopy_Pets">
+            <End Role="Pets" EntitySet="Pets" />
+            <End Role="Microscopy" EntitySet="Microscopies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pets_Owners" Association="Self.FK_Pets_Owners">
+            <End Role="Owners" EntitySet="Owners" />
+            <End Role="Pets" EntitySet="Pets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Photos_Pets" Association="Self.FK_Photos_Pets">
+            <End Role="Pets" EntitySet="Pets" />
+            <End Role="Photos" EntitySet="Photos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Surgical_treatments_Pets1" Association="Self.FK_Surgical_treatments_Pets1">
+            <End Role="Pets" EntitySet="Pets" />
+            <End Role="Surgical_treatments" EntitySet="Surgical_treatments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TemperatureList_Pets" Association="Self.FK_TemperatureList_Pets">
+            <End Role="Pets" EntitySet="Pets" />
+            <End Role="TemperatureList" EntitySet="TemperatureLists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Treatments_Pets" Association="Self.FK_Treatments_Pets">
+            <End Role="Pets" EntitySet="Pets" />
+            <End Role="Treatments" EntitySet="Treatments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UZI_Pets" Association="Self.FK_UZI_Pets">
+            <End Role="Pets" EntitySet="Pets" />
+            <End Role="UZI" EntitySet="UZIs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_XRays_Pets" Association="Self.FK_XRays_Pets">
+            <End Role="Pets" EntitySet="Pets" />
+            <End Role="XRays" EntitySet="XRays" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AnimalsModelStoreContainer" CdmEntityContainer="AnimalsEntities">
+          <EntitySetMapping Name="Analysis_of_urines">
+            <EntityTypeMapping TypeName="AnimalsModel.Analysis_of_urine">
+              <MappingFragment StoreEntitySet="Analysis of urine">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PetId" ColumnName="PetId" />
+                <ScalarProperty Name="Path" ColumnName="Path" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Anamnes">
+            <EntityTypeMapping TypeName="AnimalsModel.Anamne">
+              <MappingFragment StoreEntitySet="Anamnes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="PetId" ColumnName="PetId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Bacteriological_researches">
+            <EntityTypeMapping TypeName="AnimalsModel.Bacteriological_research">
+              <MappingFragment StoreEntitySet="Bacteriological research">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PetId" ColumnName="PetId" />
+                <ScalarProperty Name="Path" ColumnName="Path" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Biochemical_analysis_of_bloods">
+            <EntityTypeMapping TypeName="AnimalsModel.Biochemical_analysis_of_blood">
+              <MappingFragment StoreEntitySet="Biochemical analysis of blood">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PetId" ColumnName="PetId" />
+                <ScalarProperty Name="Path" ColumnName="Path" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Mochevina" ColumnName="Mochevina" />
+                <ScalarProperty Name="Kreatinin" ColumnName="Kreatinin" />
+                <ScalarProperty Name="Holesterin" ColumnName="Holesterin" />
+                <ScalarProperty Name="Glyukoza" ColumnName="Glyukoza" />
+                <ScalarProperty Name="ShelochnayaFosftaza" ColumnName="ShelochnayaFosftaza" />
+                <ScalarProperty Name="Alat" ColumnName="Alat" />
+                <ScalarProperty Name="Asat" ColumnName="Asat" />
+                <ScalarProperty Name="CommonProtein" ColumnName="CommonProtein" />
+                <ScalarProperty Name="Albumin" ColumnName="Albumin" />
+                <ScalarProperty Name="Globulin" ColumnName="Globulin" />
+                <ScalarProperty Name="Na" ColumnName="Na" />
+                <ScalarProperty Name="K" ColumnName="K" />
+                <ScalarProperty Name="Ca" ColumnName="Ca" />
+                <ScalarProperty Name="P" ColumnName="P" />
+                <ScalarProperty Name="Clhoriodu" ColumnName="Clhoriodu" />
+                <ScalarProperty Name="CommonBilubrin" ColumnName="CommonBilubrin" />
+                <ScalarProperty Name="Solidbilirubin" ColumnName="Solidbilirubin" />
+                <ScalarProperty Name="lDG" ColumnName="lDG" />
+                <ScalarProperty Name="KreatinKinaza" ColumnName="KreatinKinaza" />
+                <ScalarProperty Name="GGT" ColumnName="GGT" />
+                <ScalarProperty Name="Amilaza" ColumnName="Amilaza" />
+                <ScalarProperty Name="Lipaza" ColumnName="Lipaza" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Common_analysis_of_bloods">
+            <EntityTypeMapping TypeName="AnimalsModel.Common_analysis_of_blood">
+              <MappingFragment StoreEntitySet="Common analysis of blood">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PetId" ColumnName="PetId" />
+                <ScalarProperty Name="Leikocit" ColumnName="Leikocit" />
+                <ScalarProperty Name="Eritroc" ColumnName="Eritroc" />
+                <ScalarProperty Name="Hemoglob" ColumnName="Hemoglob" />
+                <ScalarProperty Name="Gematocrit" ColumnName="Gematocrit" />
+                <ScalarProperty Name="KolVoTrombocitov" ColumnName="KolVoTrombocitov" />
+                <ScalarProperty Name="KolVoTrombocitovManual" ColumnName="KolVoTrombocitovManual" />
+                <ScalarProperty Name="NeitrofiluSegmentPerc" ColumnName="NeitrofiluSegmentPerc" />
+                <ScalarProperty Name="NeitrofiluSegmentAbsolut" ColumnName="NeitrofiluSegmentAbsolut" />
+                <ScalarProperty Name="NeitrofiluPalochkoyadPer" ColumnName="NeitrofiluPalochkoyadPer" />
+                <ScalarProperty Name="NeitrofiluPalochkoyadAbsolut" ColumnName="NeitrofiluPalochkoyadAbsolut" />
+                <ScalarProperty Name="LimfocituPerc" ColumnName="LimfocituPerc" />
+                <ScalarProperty Name="LimfocituAbsolut" ColumnName="LimfocituAbsolut" />
+                <ScalarProperty Name="MonocituPerc" ColumnName="MonocituPerc" />
+                <ScalarProperty Name="MonocituAbsolut" ColumnName="MonocituAbsolut" />
+                <ScalarProperty Name="EozinofiluPerc" ColumnName="EozinofiluPerc" />
+                <ScalarProperty Name="EozinofiluAbsolut" ColumnName="EozinofiluAbsolut" />
+                <ScalarProperty Name="BazofiluPerc" ColumnName="BazofiluPerc" />
+                <ScalarProperty Name="BazofiluAbsolut" ColumnName="BazofiluAbsolut" />
+                <ScalarProperty Name="RetikulocituPerc" ColumnName="RetikulocituPerc" />
+                <ScalarProperty Name="RetikulocituKorrectPerc" ColumnName="RetikulocituKorrectPerc" />
+                <ScalarProperty Name="RetikulocituAbsolut" ColumnName="RetikulocituAbsolut" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Coprogram__tests">
+            <EntityTypeMapping TypeName="AnimalsModel.Coprogram__test">
+              <MappingFragment StoreEntitySet="Coprogram  tests">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PetId" ColumnName="PetId" />
+                <ScalarProperty Name="Path" ColumnName="Path" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Diagnostics">
+            <EntityTypeMapping TypeName="AnimalsModel.Diagnostic">
+              <MappingFragment StoreEntitySet="Diagnostics">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PetId" ColumnName="PetId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Doctors">
+            <EntityTypeMapping TypeName="AnimalsModel.Doctor">
+              <MappingFragment StoreEntitySet="Doctors">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Sername" ColumnName="Sername" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Materials">
+            <EntityTypeMapping TypeName="AnimalsModel.Material">
+              <MappingFragment StoreEntitySet="Materials">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Microscopies">
+            <EntityTypeMapping TypeName="AnimalsModel.Microscopy">
+              <MappingFragment StoreEntitySet="Microscopy">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Path" ColumnName="Path" />
+                <ScalarProperty Name="PetId" ColumnName="PetId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Owners">
+            <EntityTypeMapping TypeName="AnimalsModel.Owner">
+              <MappingFragment StoreEntitySet="Owners">
+                <ScalarProperty Name="Email2" ColumnName="Email2" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Sername" ColumnName="Sername" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="Adress" ColumnName="Adress" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pets">
+            <EntityTypeMapping TypeName="AnimalsModel.Pet">
+              <MappingFragment StoreEntitySet="Pets">
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nickname" ColumnName="Nickname" />
+                <ScalarProperty Name="PType" ColumnName="PType" />
+                <ScalarProperty Name="Species" ColumnName="Species" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Castration" ColumnName="Castration" />
+                <ScalarProperty Name="Vaccination" ColumnName="Vaccination" />
+                <ScalarProperty Name="Deworming" ColumnName="Deworming" />
+                <ScalarProperty Name="Treatment__parasites" ColumnName="Treatment  parasites" />
+                <ScalarProperty Name="OwnerId" ColumnName="OwnerId" />
+                <ScalarProperty Name="DoctorId" ColumnName="DoctorId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Photos">
+            <EntityTypeMapping TypeName="AnimalsModel.Photo">
+              <MappingFragment StoreEntitySet="Photos">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PetId" ColumnName="PetId" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Services">
+            <EntityTypeMapping TypeName="AnimalsModel.Service">
+              <MappingFragment StoreEntitySet="Services">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Surgical_treatments">
+            <EntityTypeMapping TypeName="AnimalsModel.Surgical_treatment">
+              <MappingFragment StoreEntitySet="Surgical treatments">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PetId" ColumnName="PetId" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="AnimalsModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TemperatureLists">
+            <EntityTypeMapping TypeName="AnimalsModel.TemperatureList">
+              <MappingFragment StoreEntitySet="TemperatureList">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Temperature" ColumnName="Temperature" />
+                <ScalarProperty Name="Pulse" ColumnName="Pulse" />
+                <ScalarProperty Name="Breath" ColumnName="Breath" />
+                <ScalarProperty Name="PetId" ColumnName="PetId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Treatments">
+            <EntityTypeMapping TypeName="AnimalsModel.Treatment">
+              <MappingFragment StoreEntitySet="Treatments">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PetId" ColumnName="PetId" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UZIs">
+            <EntityTypeMapping TypeName="AnimalsModel.UZI">
+              <MappingFragment StoreEntitySet="UZI">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PetId" ColumnName="PetId" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="XRays">
+            <EntityTypeMapping TypeName="AnimalsModel.XRay">
+              <MappingFragment StoreEntitySet="XRays">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PetId" ColumnName="PetId" />
+                <ScalarProperty Name="Path" ColumnName="Path" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
