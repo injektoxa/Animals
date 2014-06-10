@@ -18,6 +18,7 @@ namespace Animals.Models
         public string Text { get; set; }
         public Nullable<System.Guid> PetId { get; set; }
         public Nullable<System.DateTime> Date { get; set; }
+
     
         public virtual Pet Pet { get; set; }
     }
