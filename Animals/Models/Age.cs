@@ -7,6 +7,7 @@ namespace Animals.Models
 {
     public class Age
     {
+	
         public int Years;
         public int Months;
         public int Days;
