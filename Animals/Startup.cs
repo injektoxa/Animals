@@ -10,7 +10,5 @@ namespace Animals
         {
             ConfigureAuth(app);
         }
-        
     }
-    
 }
