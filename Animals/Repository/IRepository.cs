@@ -10,7 +10,6 @@ namespace Animals.Repository
     {
         IQueryable<T> FindAll(Func<T, bool> exp);
         
-
         IQueryable<T> FindAll();
         
         T Find(Guid id);
