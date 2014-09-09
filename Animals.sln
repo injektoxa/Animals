@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Animals", "Animals\Animals.csproj", "{A7802EF7-0155-4700-A417-085803ACCA74}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Animals.UnitTests", "Animals.UnitTests\Animals.UnitTests.csproj", "{38685F04-94EC-43EB-94F8-EC2C77302707}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,6 +20,12 @@ Global
 		{A7802EF7-0155-4700-A417-085803ACCA74}.Deploy-dev|Any CPU.Build.0 = Deploy-dev|Any CPU
 		{A7802EF7-0155-4700-A417-085803ACCA74}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A7802EF7-0155-4700-A417-085803ACCA74}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38685F04-94EC-43EB-94F8-EC2C77302707}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38685F04-94EC-43EB-94F8-EC2C77302707}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38685F04-94EC-43EB-94F8-EC2C77302707}.Deploy-dev|Any CPU.ActiveCfg = Debug|Any CPU
+		{38685F04-94EC-43EB-94F8-EC2C77302707}.Deploy-dev|Any CPU.Build.0 = Debug|Any CPU
+		{38685F04-94EC-43EB-94F8-EC2C77302707}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38685F04-94EC-43EB-94F8-EC2C77302707}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
