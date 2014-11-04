@@ -1,4 +1,5 @@
-﻿using Animals.Models;
+﻿using System.Transactions;
+using Animals.Models;
 using Animals.Repository;
 using Animals.ViewModels;
 using System;
@@ -157,7 +158,7 @@ namespace Animals.Controllers
                 return HttpNotFound();
             }
 
-            return View(owner);
+            return null;
         }
 
         // GET: /Owner/Create
@@ -183,36 +184,51 @@ namespace Animals.Controllers
             string petType = ((string[])(ownerWithClient.PetTypes))[0];
             Guid doctorId = new Guid(((string[])(ownerWithClient.ListDoctors))[0]);
 
-            if (petType != "--Выберите тип--" && Guid.Empty != doctorId)
+            using (TransactionScope tr = new TransactionScope())
             {
-                Owner owner = ownerWithClient.Owner;
+                if (petType != "--Выберите тип--" && Guid.Empty != doctorId)
+                {
+                    Owner owner = ownerWithClient.Owner;
 
-                owner.Id = Guid.NewGuid();
-                owner.Date = DateTime.Now;
+                    owner.Id = Guid.NewGuid();
+                    owner.Date = DateTime.Now;
 
-                _ownerRepository.Add(owner);
-                _ownerRepository.SaveAll();
+                    _ownerRepository.Add(owner);
+                    _ownerRepository.SaveAll();
 
-                Pet pet = ownerWithClient.Pet;
-                pet.OwnerId = owner.Id;
-                pet.Id = Guid.NewGuid();
-                pet.Date = DateTime.Now;
-                pet.PType = petType;
-                pet.DoctorId = doctorId;
-                _petRepository.Add(pet);
-                _petRepository.SaveAll();
+                    Pet pet = ownerWithClient.Pet;
+                    pet.OwnerId = owner.Id;
+                    pet.Id = Guid.NewGuid();
+                    pet.Date = DateTime.Now;
+                    pet.PType = petType;
+                    pet.DoctorId = doctorId;
 
-                return RedirectToAction("Index", "Owners");
+                    if (pet.BirthDate > DateTime.Now)
+                        return View(SomethingWentWrong("Дата рождения позже текущей"));
+ 
+                    _petRepository.Add(pet);
+                    _petRepository.SaveAll();
+
+                     tr.Complete();
+
+                    return RedirectToAction("Index", "Owners");
+                }
+                
             }
 
+            return View(SomethingWentWrong("Доктор или тим животного не выбран"));
+        }
+
+        private ClientsWithPetsVM SomethingWentWrong(string message)
+        {
             Populater populater = new Populater();
 
             ClientsWithPetsVM clientPetsVm = new ClientsWithPetsVM();
             clientPetsVm.PetTypes = populater.PopulatePetTypesList();
             clientPetsVm.ListDoctors = populater.PopulateDoctorsList(_doctorRepository.FindAll().ToList());
-            clientPetsVm.Message = "Доктор или тип животного не выбран";
+            clientPetsVm.Message = message;
 
-            return View(clientPetsVm);
+            return clientPetsVm;
         }
 
         // GET: /Owner/Edit/5
@@ -224,7 +240,7 @@ namespace Animals.Controllers
             }
 
             Owner owners = _ownerRepository.Find(id.ToGuid());
-            
+
             if (owners == null)
             {
                 return HttpNotFound();
@@ -244,7 +260,7 @@ namespace Animals.Controllers
                 _ownerRepository.Update(owner);
 
                 _ownerRepository.SaveAll();
-                
+
                 return RedirectToAction("Index");
             }
             return View(owner);
@@ -257,7 +273,7 @@ namespace Animals.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            
+
             Owner owner = _ownerRepository.Find(id.ToGuid());
 
             if (owner == null)
@@ -276,7 +292,7 @@ namespace Animals.Controllers
 
             _ownerRepository.Delete(owner);
             _ownerRepository.SaveAll();
-          
+
             return RedirectToAction("Index");
         }
     }

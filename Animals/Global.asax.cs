@@ -1,9 +1,4 @@
-﻿using Animals.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 
@@ -17,26 +12,27 @@ namespace Animals
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
             UnityConfig.RegisterComponents();
         }
     }
 
-    public class DbContext
-    {
-        private static AnimalsEntities instance;
+    //public class DbContext
+    //{
+    //    private static AnimalsEntities instance;
 
-        private DbContext() { }
+    //    private DbContext() { }
 
-        public static AnimalsEntities Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = new AnimalsEntities();
-                }
-                return instance;
-            }
-        }
-    }
+    //    public static AnimalsEntities Instance
+    //    {
+    //        get
+    //        {
+    //            if (instance == null)
+    //            {
+    //                instance = new AnimalsEntities();
+    //            }
+    //            return instance;
+    //        }
+    //    }
+    //}
 }

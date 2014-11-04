@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Net;
+using System.Transactions;
 using System.Web.Mvc;
 using System.IO;
 using Animals.Models;
@@ -15,18 +16,18 @@ namespace Animals.Controllers
     {
         private readonly IRepository<Pet> _petRepository;
         private readonly IRepository<Doctor> _doctorRepository;
-        
+
         public PetsController(IRepository<Pet> petRepository, IRepository<Doctor> doctorRepository)
         {
             _petRepository = petRepository;
             _doctorRepository = doctorRepository;
         }
-        
+
         public ActionResult Create(Guid? id)
         {
             PetsVM petVm = new PetsVM();
             petVm.Pet = new Pet();
-            petVm.Pet.OwnerId = id.ToGuid();  
+            petVm.Pet.OwnerId = id.ToGuid();
 
             Populater populate = new Populater();
             petVm.PetTypes = populate.PopulatePetTypesList();
@@ -39,26 +40,32 @@ namespace Animals.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Pet,ListDoctors,PetTypes")] PetsVM petvm)
         {
-           string petType = ((string[])(petvm.PetTypes))[0];
+            string petType = ((string[])(petvm.PetTypes))[0];
             Guid doctorId = new Guid(((string[])(petvm.ListDoctors))[0]);
 
-            if (petType != "--Выберите тип--" && Guid.Empty != doctorId)
+            using (TransactionScope tr = new TransactionScope())
             {
-                if (ModelState.IsValid)
+                if (petType != "--Выберите тип--" && Guid.Empty != doctorId)
                 {
-                    Pet pet = petvm.Pet;
-                    pet.Id = Guid.NewGuid();
-                    pet.Date = DateTime.Now;
-                    pet.PType = petType;
-                    pet.DoctorId = doctorId;
-                    pet.OwnerId = petvm.Pet.OwnerId;
-                    
-                    _petRepository.Add(pet);
-                    _petRepository.SaveAll();
-                    
-                    return RedirectToAction("Details", "Pets", new { id = pet.Id });
+                    if (ModelState.IsValid)
+                    {
+                        Pet pet = petvm.Pet;
+                        pet.Id = Guid.NewGuid();
+                        pet.Date = DateTime.Now;
+                        pet.PType = petType;
+                        pet.DoctorId = doctorId;
+                        pet.OwnerId = petvm.Pet.OwnerId;
+
+                        _petRepository.Add(pet);
+                        _petRepository.SaveAll();
+
+                        tr.Complete();
+
+                        return RedirectToAction("Details", "Pets", new { id = pet.Id });
+                    }
                 }
             }
+
 
             return View(petvm);
         }
@@ -94,7 +101,7 @@ namespace Animals.Controllers
             {
                 return HttpNotFound();
             }
-            
+
             return View(pet);
         }
 
@@ -122,11 +129,6 @@ namespace Animals.Controllers
 
             ViewBag.PetType = pet.PType;
             ViewBag.DoctorName = pet.Doctor.Name;
-            
-            if (pet == null)
-            {
-                return HttpNotFound();
-            }
 
             return View(pet);
         }
@@ -142,7 +144,7 @@ namespace Animals.Controllers
 
                 return RedirectToAction("Details", new { id = pet.Id });
             }
-       
+
             return View(pet);
         }
     }
