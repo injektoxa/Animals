@@ -1,3 +1,4 @@
+using System.Data.Entity;
 using System.Web.Mvc;
 using Microsoft.Practices.Unity;
 using Unity.Mvc5;
@@ -21,6 +22,7 @@ namespace Animals
             container.RegisterType<IRepository<Surgical_treatment>, SQLRepository<Surgical_treatment>>();
             container.RegisterType<IRepository<Treatment>, SQLRepository<Treatment>>();
             container.RegisterType<AccountController>(new InjectionConstructor());
+            container.RegisterInstance(DbContext.Instance);
 
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }

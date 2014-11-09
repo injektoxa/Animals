@@ -1,6 +1,7 @@
 ﻿using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Animals.Models;
 
 namespace Animals
 {
@@ -17,22 +18,22 @@ namespace Animals
         }
     }
 
-    //public class DbContext
-    //{
-    //    private static AnimalsEntities instance;
+    public class DbContext
+    {
+        private static AnimalsEntities instance;
 
-    //    private DbContext() { }
+        private DbContext() { }
 
-    //    public static AnimalsEntities Instance
-    //    {
-    //        get
-    //        {
-    //            if (instance == null)
-    //            {
-    //                instance = new AnimalsEntities();
-    //            }
-    //            return instance;
-    //        }
-    //    }
-    //}
+        public static AnimalsEntities Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new AnimalsEntities();
+                }
+                return instance;
+            }
+        }
+    }
 }
