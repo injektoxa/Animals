@@ -8,3 +8,4 @@ Animals/App_Data/UserAccounts.mdf
 Animals/App_Data/UserAccounts_log.ldf
 Animals.UnitTests/bin/Debug/
 Animals.UnitTests/obj/Debug/Animals.UnitTests.csproj.FileListAbsolute.txt
+Animals.UnitTests/obj/Debug/
