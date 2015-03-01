@@ -1,164 +1,189 @@
-﻿using System.Transactions;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
+using System.Data.Entity.ModelConfiguration.Conventions;
+using System.Linq;
+using System.Net;
+using System.Transactions;
+using System.Web.Mvc;
+using Animals.Extansions;
 using Animals.Models;
 using Animals.Repository;
 using Animals.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Web.Mvc;
-using Animals.Extansions;
 
 namespace Animals.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class OwnersController : Controller
     {
+        private AnimalsEntities _context;
+
         private readonly IRepository<Owner> _ownerRepository;
         private readonly IRepository<Pet> _petRepository;
         private readonly IRepository<Doctor> _doctorRepository;
 
-        public OwnersController(IRepository<Owner> ownerRepository, IRepository<Pet> petRepository, IRepository<Doctor> docRepository)
+        public OwnersController()
         {
-            this._ownerRepository = ownerRepository;
-            this._petRepository = petRepository;
-            this._doctorRepository = docRepository;
+            _context = new AnimalsEntities();
+
+            _ownerRepository = new SQLRepository<Owner>(_context);
+            _petRepository = new SQLRepository<Pet>(_context);
+            _doctorRepository = new SQLRepository<Doctor>(_context);
         }
 
-        public ActionResult Index(string searchPet, string searchPhone, string searchAddress, string searchSername, string searchBreed, string searchNumber)
+        private string BuildQuery(System.Collections.Specialized.NameValueCollection query)
         {
-            IEnumerable<Owner> allOwners = _ownerRepository.FindAll();
-
-            if (string.IsNullOrEmpty(searchPet)
-                && string.IsNullOrEmpty(searchPhone)
-                && string.IsNullOrEmpty(searchAddress)
-                && string.IsNullOrEmpty(searchNumber)
-                && string.IsNullOrEmpty(searchBreed)
-                && string.IsNullOrEmpty(searchSername))
+            var filtersCount = int.Parse(query.GetValues("filterscount")[0]);
+            var queryString = @"SELECT * FROM Owners ";
+            var tmpDataField = "";
+            var tmpFilterOperator = "";
+            var where = "";
+            if (filtersCount > 0)
             {
-                allOwners = FilterDate(allOwners);
+                where = " WHERE (";
             }
-
-            if (!string.IsNullOrEmpty(searchSername))
+            for (var i = 0; i < filtersCount; i += 1)
             {
-                allOwners = FilterSername(allOwners, searchSername);
-            }
-
-            if (!string.IsNullOrEmpty(searchPhone))
-            {
-                allOwners = FilterPhone(allOwners, searchPhone);
-            }
-
-            if (!string.IsNullOrEmpty(searchAddress))
-            {
-                allOwners = FilterAddress(allOwners, searchAddress);
-            }
-
-            if (!string.IsNullOrEmpty(searchNumber))
-            {
-                allOwners = FilterNumber(allOwners, searchNumber);
-            }
-
-            if (!string.IsNullOrEmpty(searchPet))
-            {
-                allOwners = FilterPets(allOwners, searchPet);
-            }
-
-            if (!string.IsNullOrEmpty(searchBreed))
-            {
-                allOwners = FilterBreed(allOwners, searchBreed);
-            }
-
-            return View(allOwners);
-        }
-
-        private IEnumerable<Owner> FilterBreed(IEnumerable<Owner> allOwners, string searchBreed)
-        {
-            List<Owner> owlist = new List<Owner>();
-
-            foreach (var o in allOwners)
-            {
-                foreach (var p in o.Pets)
+                var filterValue = query.GetValues("filtervalue" + i)[0];
+                var filterCondition = query.GetValues("filtercondition" + i)[0];
+                var filterDataField = query.GetValues("filterdatafield" + i)[0];
+                var filterOperator = query.GetValues("filteroperator" + i)[0];
+                if (tmpDataField == "")
                 {
-                    if (p.Species.Contains(searchBreed))
+                    tmpDataField = filterDataField;
+                }
+                else if (tmpDataField != filterDataField)
+                {
+                    where += ") AND (";
+                }
+                else if (tmpDataField == filterDataField)
+                {
+                    if (tmpFilterOperator == "")
                     {
-                        owlist.Add(o);
+                        where += " AND ";
+                    }
+                    else
+                    {
+                        where += " OR ";
                     }
                 }
-            }
-
-            return owlist as IEnumerable<Owner>;
-        }
-
-        private IEnumerable<Owner> FilterPets(IEnumerable<Owner> allOwners, string searchPet)
-        {
-            List<Owner> owlist = new List<Owner>();
-
-            foreach (var owner in allOwners)
-            {
-                foreach (var pet in owner.Pets)
+                // build the "WHERE" clause depending on the filter's condition, value and datafield.
+                where += this.GetFilterCondition(filterCondition, filterDataField, filterValue);
+                if (i == filtersCount - 1)
                 {
-                    if (pet.Nickname.StartsWith(searchPet, StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        owlist.Add(owner);
-                    }
+                    where += ")";
                 }
+                tmpFilterOperator = filterOperator;
+                tmpDataField = filterDataField;
             }
-
-            return owlist as IEnumerable<Owner>;
+            queryString += where;
+            return queryString;
         }
 
-        private IEnumerable<Owner> FilterNumber(IEnumerable<Owner> allOwners, string searchNumber)
+        private string GetFilterCondition(string filterCondition, string filterDataField, string filterValue)
         {
-            List<Owner> owlist = new List<Owner>();
-
-            foreach (var s in allOwners)
+            switch (filterCondition)
             {
-                if (s.Number.ToString().Contains(searchNumber))
-                {
-                    owlist.Add(s);
-                }
+                case "NOT_EMPTY":
+                case "NOT_NULL":
+                    return " " + filterDataField + " NOT LIKE '" + "" + "'";
+                case "EMPTY":
+                case "NULL":
+                    return " " + filterDataField + " LIKE '" + "" + "'";
+                case "CONTAINS_CASE_SENSITIVE":
+                    return " " + filterDataField + " LIKE N'%" + filterValue + "%'" + " COLLATE SQL_Latin1_General_CP1_CS_AS";
+                case "CONTAINS":
+                    return " " + filterDataField + " LIKE N'%" + filterValue + "%'";
+                case "DOES_NOT_CONTAIN_CASE_SENSITIVE":
+                    return " " + filterDataField + " NOT LIKE N'%" + filterValue + "%'" + " COLLATE SQL_Latin1_General_CP1_CS_AS"; ;
+                case "DOES_NOT_CONTAIN":
+                    return " " + filterDataField + " NOT LIKE N'%" + filterValue + "%'";
+                case "EQUAL_CASE_SENSITIVE":
+                    return " " + filterDataField + " = N'" + filterValue + "'" + " COLLATE SQL_Latin1_General_CP1_CS_AS"; ;
+                case "EQUAL":
+                    return " " + filterDataField + " = N'" + filterValue + "'";
+                case "NOT_EQUAL_CASE_SENSITIVE":
+                    return " BINARY " + filterDataField + " <> '" + filterValue + "'";
+                case "NOT_EQUAL":
+                    return " " + filterDataField + " <> '" + filterValue + "'";
+                case "GREATER_THAN":
+                    return " " + filterDataField + " > '" + filterValue + "'";
+                case "LESS_THAN":
+                    return " " + filterDataField + " < '" + filterValue + "'";
+                case "GREATER_THAN_OR_EQUAL":
+                    return " " + filterDataField + " >= '" + filterValue + "'";
+                case "LESS_THAN_OR_EQUAL":
+                    return " " + filterDataField + " <= '" + filterValue + "'";
+                case "STARTS_WITH_CASE_SENSITIVE":
+                    return " " + filterDataField + " LIKE N'" + filterValue + "%'" + " COLLATE SQL_Latin1_General_CP1_CS_AS"; ;
+                case "STARTS_WITH":
+                    return " " + filterDataField + " LIKE N'" + filterValue + "%'";
+                case "ENDS_WITH_CASE_SENSITIVE":
+                    return " " + filterDataField + " LIKE N'%" + filterValue + "'" + " COLLATE SQL_Latin1_General_CP1_CS_AS"; ;
+                case "ENDS_WITH":
+                    return " " + filterDataField + " LIKE N'%" + filterValue + "'";
             }
-
-            return owlist as IEnumerable<Owner>;
+            return "";
         }
 
-        private IEnumerable<Owner> FilterAddress(IEnumerable<Owner> allOwners, string searchAddress)
+        private IEnumerable<Owner> GetOwnersFromQuery(DbRawSqlQuery<Owner> dbResult)
         {
-            return allOwners.Where(o => o.Adress.StartsWith(searchAddress, StringComparison.CurrentCultureIgnoreCase));
+            var orders = from owner in dbResult
+                         select new Owner
+                         {
+                             Id = owner.Id,
+                             Name = owner.Name,
+                             Number = owner.Number,
+                             Patronymic = owner.Patronymic,
+                             Phone = owner.Phone,
+                             Sername = owner.Sername,
+                             Adress = owner.Adress,
+                             Date = owner.Date,
+                             Email = owner.Email
+                         };
+            return orders;
         }
 
-        private IEnumerable<Owner> FilterPhone(IEnumerable<Owner> allOwners, string searchPhone)
+        public JsonResult GetOwners()
         {
-            return allOwners.Where(o => o.Phone.StartsWith(searchPhone));
-        }
+            IEnumerable<Owner> owners = null;
 
-        private IEnumerable<Owner> FilterSername(IEnumerable<Owner> allOwners, string searchSername)
-        {
-            return allOwners.Where(o => o.Sername.StartsWith(searchSername, StringComparison.CurrentCultureIgnoreCase));
-        }
-
-        private IEnumerable<Owner> FilterDate(IEnumerable<Owner> allOwners)
-        {
-            DateTime dtMonthAgo = DateTime.Now.AddDays(-30);
-            return allOwners.Where(o => o.Date > dtMonthAgo).OrderByDescending(a => a.Number);
-        }
-
-        public ActionResult Details(Guid? id)
-        {
-            if (id == null)
+            var query = Request.QueryString;
+            
+            if (query.Get("filterscount")=="0")
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                var dbResult = _context.Database.SqlQuery<Owner>("select * from Owners WHERE DATEDIFF( d, Date, GETDATE() ) < 30");
+                owners = GetOwnersFromQuery(dbResult);
+            }
+            else
+            {
+                var dbResult = _context.Database.SqlQuery<Owner>(this.BuildQuery(query));
+                owners = GetOwnersFromQuery(dbResult);
             }
 
+            return Json(owners, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        public JsonResult Details(Guid? id)
+        {
             Owner owner = _ownerRepository.Find(id.ToGuid());
 
-            if (owner == null)
-            {
-                return HttpNotFound();
-            }
+            var petsNames = (from pet in owner.Pets
+                          select new
+                          {
+                              pet.Nickname,
+                              pet.Id,
+                              pet.PType,
+                              pet.Species,
+                              pet.BirthDate
+                          });
 
-            return null;
+            return Json(petsNames, JsonRequestBehavior.AllowGet);
         }
 
         // GET: /Owner/Create
@@ -205,15 +230,15 @@ namespace Animals.Controllers
 
                     if (pet.BirthDate > DateTime.Now)
                         return View(SomethingWentWrong("Дата рождения позже текущей"));
- 
+
                     _petRepository.Add(pet);
                     _petRepository.SaveAll();
 
-                     tr.Complete();
+                    tr.Complete();
 
                     return RedirectToAction("Index", "Owners");
                 }
-                
+
             }
 
             return View(SomethingWentWrong("Доктор или тим животного не выбран"));

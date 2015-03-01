@@ -11,7 +11,7 @@ using Animals.Extansions;
 
 namespace Animals.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class PetsController : Controller
     {
         private readonly IRepository<Pet> _petRepository;

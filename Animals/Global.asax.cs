@@ -16,23 +16,4 @@ namespace Animals
             UnityConfig.RegisterComponents();
         }
     }
-
-    //public class DbContext
-    //{
-    //    private static AnimalsEntities instance;
-
-    //    private DbContext() { }
-
-    //    public static AnimalsEntities Instance
-    //    {
-    //        get
-    //        {
-    //            if (instance == null)
-    //            {
-    //                instance = new AnimalsEntities();
-    //            }
-    //            return instance;
-    //        }
-    //    }
-    //}
 }

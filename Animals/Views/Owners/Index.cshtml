@@ -1,169 +1,114 @@
-﻿@model IEnumerable<Animals.Models.Owner>
-
-@{
-    ViewBag.Title = "Пациенты";
+﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<style type="text/css">
-        table.ownertable {
-            font-family: verdana,arial,sans-serif;
-            font-size: 11px;
-            color: #333333;
-            border-width: 1px;
-            border-color: #999999;
-            border-collapse: collapse;
-        }
+<link rel="stylesheet" type="text/css" href="http://jqwidgets.com/jquery-widgets-demo/jqwidgets/styles/jqx.base.css" />
+<script src="~/Scripts/jqx-all.js"></script>
 
-        table.ownertable th {
-            background: #b5cfd2 url('Content/cell-blue.jpg');
-            border-width: 1px;
-            padding: 8px;
-            border-style: solid;
-            border-color: #999999;
-        }
 
-            table.ownertable td {
-                background: #dcddc0 url('Content/cell-grey.jpg');
-                border-width: 1px;
-                padding: 8px;
-                border-style: solid;
-                border-color: #999999;
-                background-repeat: no-repeat;
-            }
+<script type="text/javascript">
 
-        table.pet, table.pet th, table.pet td {
-            border: none;
-            background: none;
-        }
-
-        table.pet td {
-            width: 100px;
-        }
-</style>
-
-<h2>Клиенты</h2>
-
-<p>
-    @Html.ActionLink("Добавить клиента", "Create")
-
-    @using (Html.BeginForm())
-    {
-    <table>
-
-        <tr>
-            <td>
-                Фамилия:
-            </td>
-            <td>
-                @Html.TextBox("searchSername")
-            </td>
-            <td>
-                Адрес:
-            </td>
-            <td>
-                @Html.TextBox("searchAddress")
-            </td>
-            <td>
-                Телефон:
-            </td>
-            <td>
-                @Html.TextBox("searchPhone")
-            </td>
-        </tr>
-
-        <tr>
-            <td>
-                Кличка:
-            </td>
-            <td>
-                @Html.TextBox("searchPet")
-            </td>
-            <td>
-                Порода:
-            </td>
-            <td>
-                @Html.TextBox("searchBreed")
-            </td>
-            <td>
-                Номер:
-            </td>
-            <td>
-                @Html.TextBox("searchNumber")
-            </td>
-        </tr>
-        <tr>
-            <input type="submit" value="Поиск" />
-        </tr>
-    </table>
+    var success = function (parameters) {
+        alert(parameters);
     }
-</p>
-<table class="ownertable">
-    <tr>
-        <th>
-            №
-        </th>
-        <th>
-            Имя
-        </th>
-        <th>
-            Фамилия
-        </th>
-        <th>
-            Телефон
-        </th>
-        <th>
-            Адрес
-        </th>
-        <th>
-            Email
-        </th>
-        <th>
 
-        </th>
-        <th>
+    $(document).ready(function () {
 
-        </th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Number)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Sername)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Phone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Adress)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @{
-        foreach (var pet in item.Pets)
+        // prepare the data
+        var source =
         {
-            @Html.Partial("~/Views/Pets/_Index.cshtml", pet);
+            datatype: "json",
+            datafields: [
+                { name: 'Id', type: 'string' },
+                { name: 'Name', type: 'string' },
+                { name: 'Number', type: 'number' },
+                { name: 'Patronymic', type: 'string' },
+                { name: 'Phone', type: 'string' },
+                { name: 'Sername', type: 'string' },
+                { name: 'Adress', type: 'string' },
+                { name: 'Date', type: 'date' },
+                { name: 'Email', type: 'string' },
+            ],
+            url: '/Owners/GetOwners',
+            pagesize: 20,
+            filter: function () {
+                // update the grid and send a request to the server.
+                $("#grid").jqxGrid('updatebounddata', 'filter');
+            }
+        };
+
+        var linkrenderer = function (row, column, value) {
+            if (value.indexOf('#') != -1) {
+                value = value.substring(0, value.indexOf('#'));
+            }
+            
+            var html = "<a href='/Pets/Create/" + value + "' > Добавить </a>";
+            return html;
         }
+
+        var dataAdapter = new $.jqx.dataAdapter(source);
+
+        var initrowdetails = function (index, parentElement, gridElement, datarecord) {
+            var details = $($(parentElement).children()[0]);
+
+            $.ajax({
+                url: "/Owners/Details/" + datarecord.Id,
+                type: "POST",
+                contentType: "application/json",
+                success: function (data) {
+                    for (var i = 0; i < data.length; i++) {
+                        var name = data[i].Nickname;
+                        var id = data[i].Id;
+                        var ptype = data[i].PType;
+                        var breed = data[i].Species;
+
+                        var date;
+                        if (data[i].BirthDate != null) {
+                            date = new Date(parseInt(data[i].BirthDate.substr(6))).getFullYear();
+                        } else
+                            date = '';
+
+                        details.html("<a href='/Pets/Details/" + id + "' >" + name + "</a><br/>" +
+                                      " " + ptype + ", " + breed + " " + date + "");
+                    }
+                },
+                error: function (parameters) {
+                    alert(parameters);
                 }
-            </td>
-            <td>
-                @Html.ActionLink("Изменить", "Edit", new { id = item.Id }) <br/>
-                @*@Html.ActionLink("Удалить", "Delete", new { id = item.Id }) <br/>*@
-                @Html.ActionLink("Добавить", "Create", "Pets" , new { id = item.Id },null)
-            </td>
-        </tr>
-    }
+            });
+        }
 
-</table>
+        // initialize jqxGrid
+        $("#grid").jqxGrid(
+        {
+            width: 1150,
+            source: dataAdapter,
+            pageable: true,
+            autoheight: true,
+            filterable: true,
+            initrowdetails: initrowdetails,
+            enabletooltips: true,
+            sortable: true,
+            editable: true,
+            autoshowfiltericon: true,
+            selectionmode: 'multiplecellsadvanced',
+            rowdetails: true,
+            rowdetailstemplate: { rowdetails: "<div style='margin: 10px;'></div>", rowdetailsheight: 50 },
 
+            columns: [
+                { text: "Номер", datafield: "Number", width: 50 },
+                { text: "Фамилия", datafield: "Sername", width: 120 },
+                { text: "Имя", datafield: "Name", width: 100 },
+                { text: "Отчество", datafield: "Patronymic", width: 100 },
+                { text: "Телефон", datafield: "Phone", width: 120, sortable: false },
+                { text: "Адрес", datafield: "Adress", width: 200 },
+                { text: "Дата приема", datafield: "Date", width: 150, cellsformat: 'd' },
+                { text: "Email", datafield: "Email", width: 100 },
+                { text: "", datafield: "Id", width: 160, cellsrenderer: linkrenderer, filterable: false,sortable:false }
+            ]
+        });
+    });
 
-
+</script>
+@Html.ActionLink("Добавить клиента", "Create")
+<div id="grid"></div>

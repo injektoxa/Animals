@@ -20,7 +20,7 @@ namespace Animals
             container.RegisterType<IRepository<Diagnostic>, SQLRepository<Diagnostic>>();
             container.RegisterType<IRepository<Surgical_treatment>, SQLRepository<Surgical_treatment>>();
             container.RegisterType<IRepository<Treatment>, SQLRepository<Treatment>>();
-            container.RegisterType<AccountController>(new InjectionConstructor());
+            //container.RegisterType<AccountController>(new InjectionConstructor());
 
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }

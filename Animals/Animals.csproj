@@ -213,6 +213,7 @@
     </Compile>
     <Compile Include="Models\Age.cs" />
     <Compile Include="Models\DoctorForDDl.cs" />
+    <Compile Include="Models\OwnerDTO.cs" />
     <Compile Include="Models\OwnerMetaData.cs" />
     <Compile Include="Models\PetMetaData.cs" />
     <Compile Include="Models\Populater.cs" />
@@ -270,6 +271,8 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\JqGridObject.cs" />
+    <Compile Include="ViewModels\PetDTO.cs" />
     <Compile Include="ViewModels\PetsVM.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -277,6 +280,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\cell-blue.jpg" />
     <Content Include="Content\cell-grey.jpg" />
+    <Content Include="Content\jqx.darkblue.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -300,6 +304,7 @@
       <LastGenOutput>AnimalsDM.cs</LastGenOutput>
     </Content>
     <None Include="Properties\PublishProfiles\dev.pubxml" />
+    <None Include="Properties\PublishProfiles\iis.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -309,6 +314,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\jquery.webcam.js" />
+    <Content Include="Scripts\jqx-all.js" />
+    <Content Include="Scripts\jqxcore.js" />
+    <Content Include="Scripts\jqxgrid.js" />
     <Content Include="Scripts\jscam.swf" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
@@ -340,7 +348,6 @@
     <Content Include="Views\Pets\Edit.cshtml" />
     <Content Include="Views\Anamnes\Create.cshtml" />
     <Content Include="Views\Pets\_Index.cshtml" />
-    <Content Include="Views\Pets\_Create.cshtml" />
     <Content Include="Views\Diagnosis\Create.cshtml" />
     <Content Include="Views\Diagnosis\Delete.cshtml" />
     <Content Include="Views\Surgical\Create.cshtml" />
@@ -350,6 +357,7 @@
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Views\Owners\Details.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -3,10 +3,10 @@
 <table class="pet">
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => Model.Nickname)
+            @Model.Nickname
         </td>
         <td>
-            @Html.DisplayFor(modelItem => Model.PType)
+            @Html.Model.PType
         </td>
         <td>
             @{
@@ -19,7 +19,7 @@
             }
         </td>
         <td>
-            @Html.DisplayFor(modelItem => Model.Doctor.Name)
+            @Model.Doctor.Name
         </td>
         <td>
             @Html.ActionLink("Подробнее", "Details", "Pets", new { id = Model.Id }, null)

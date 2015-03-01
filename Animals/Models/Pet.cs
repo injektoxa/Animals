@@ -11,7 +11,7 @@ namespace Animals.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    [Serializable]
     public partial class Pet
     {
         public Pet()

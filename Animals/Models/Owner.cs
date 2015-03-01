@@ -11,12 +11,13 @@ namespace Animals.Models
 {
     using System;
     using System.Collections.Generic;
-    
+
+    [Serializable]
     public partial class Owner
     {
         public Owner()
         {
-            this.Pets = new HashSet<Pet>();
+            this.Pets = new List<Pet>();
         }
     
         public System.Guid Id { get; set; }
@@ -30,6 +31,6 @@ namespace Animals.Models
         public string Email { get; set; }
         public string Email2 { get; set; }
     
-        public virtual ICollection<Pet> Pets { get; set; }
+        public virtual List<Pet> Pets { get; set; }
     }
 }
